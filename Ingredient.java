@@ -21,9 +21,9 @@ public class Ingredient {
     private String unite;
 
     /** Liste des informations nutritionnelles (ex : calories, protéines, etc.) */
-    private List<Float> informationNutritionnelles;
+    private List<Double> informationNutritionnelles;
 
-    public Ingredient(String nom, int id, int nomFamille, String unite, List<Float> informationNutritionnelles) {
+    public Ingredient(String nom, int id, int nomFamille, String unite, List<Double> informationNutritionnelles) {
         this.nom = nom;
         this.id = id;
         this.nomFamille = nomFamille;
@@ -47,7 +47,7 @@ public class Ingredient {
         return unite;
     }
 
-    public List<Float> getInformationNutritionnelles() {
+    public List<Double> getInformationNutritionnelles() {
         return informationNutritionnelles;
     }
 
