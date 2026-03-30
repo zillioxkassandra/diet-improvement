@@ -17,12 +17,12 @@ public class Repas {
         this.nom = nom;
     }
 
-    /// Getteur & Accesseur
+    /// Getter & Setter
     public ArrayList<Consommable> getListConsommable() {
         return ListConsommable;
     }
 
-    public void setListConsomable(ArrayList<Consommable> listConsommable) {
+    public void setListConsommable(ArrayList<Consommable> listConsommable) {
         ListConsommable = listConsommable;
     }
 
