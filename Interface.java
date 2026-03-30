@@ -36,11 +36,13 @@ public class Interface {
         // Liste d'ingrédients possibles
         String[] ingredients = {"Pomme", "Banane", "Carotte", "Tomate", "Lait", "Oeuf", "Fromage", "Poulet", "Riz", "Haricot"};
 
+        // JComboBox éditable pour recherche
         JComboBox<String> recherche = new JComboBox<>(ingredients);
         recherche.setEditable(true);
         recherche.setSelectedIndex(-1);
         recherche.setBackground(Color.WHITE);
 
+        // Ligne Base
         JPanel ligneBase = new JPanel(new BorderLayout());
         ligneBase.setPreferredSize(new Dimension(750, 40));
         ligneBase.setBackground(new Color(230, 230, 230));
@@ -92,13 +94,21 @@ public class Interface {
             utilisateur.add(ligne);
         }
 
+        // ===== ACTION BOUTON + =====
         plus.addActionListener(e -> {
             String selection = (String) recherche.getSelectedItem();
             if(selection != null && !selection.isEmpty()){
-                champsUtilisateur[0].setText(selection);
+                // Parcourir toutes les lignes et remplir la première vide
+                for(JTextField champ : champsUtilisateur){
+                    if(champ.getText().isEmpty()){
+                        champ.setText(selection);
+                        break; // arrêter après avoir rempli la première ligne vide
+                    }
+                }
             }
         });
 
+        // ===== ACTION BOUTON QUITTER =====
         quitter.addActionListener(e -> accueil.dispose());
 
         // ===== SUD =====
