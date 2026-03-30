@@ -9,20 +9,20 @@ import java.util.*;
  * et celle qui affichera les informations nutritionnelles du repas.
  */
 public class Repas {
-    ArrayList<Consomable> ListConsumable;
+    ArrayList<Consommable> ListConsumable;
     String nom;
 
-    public Repas(ArrayList<Consomable> ListConsomable, String nom) {
+    public Repas(ArrayList<Consommable> ListConsomable, String nom) {
         this.ListConsumable = ListConsomable;
         this.nom = nom;
     }
 
     /// Getteur & Accesseur
-    public ArrayList<Consomable> getListConsomable() {
+    public ArrayList<Consommable> getListConsomable() {
         return ListConsumable;
     }
 
-    public void setListConsomable(ArrayList<Consomable> listConsomable) {
+    public void setListConsomable(ArrayList<Consommable> listConsomable) {
         ListConsumable = listConsomable;
     }
 
