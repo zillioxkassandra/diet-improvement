@@ -9,8 +9,8 @@ import java.util.*;
  * et celle qui affichera les informations nutritionnelles du repas.
  */
 public class Repas {
-    ArrayList<Consommable> ListConsommable;
-    String nom;
+    private ArrayList<Consommable> ListConsommable;
+    private String nom;
 
     public Repas(ArrayList<Consommable> ListConsommable, String nom) {
         this.ListConsommable = ListConsommable;
@@ -32,10 +32,22 @@ public class Repas {
 
     public void setNom(String nom) {}
 
-    /*public ArrayList<int> calculer(){
-        return list
+/* BUG A TERMINEE
+    public ArrayList<Double> calculer(){
+        List<Double> infonutrifinale ;
+        for (int i = 0; i < ListConsommable.size(); i++){
+            Consommable c = ListConsommable.get(i);
+            Ingredient ingredient  = c.GetIngredient();
+            List<Double> infonutri = ingredient.getInformationNutritionnelles();
+            for (int j = 0; j < infonutri.size(); j++){
+                double score = infonutri.get(j)* c.GetQuantite();
+                infonutrifinale.add(j, score);
+            }
+
+        }
+        return  infonutrifinale ;
     }
-    */
+*/
 
     public void ajouter(Consommable c){
         ListConsommable.add(c);
