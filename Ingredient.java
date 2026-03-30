@@ -15,7 +15,7 @@ public class Ingredient {
     private int id;
 
     /** Identifiant de la famille de l'ingrédient */
-    private int nomFamille;
+    private String nomFamille;
 
     /** Unité de mesure de l'ingrédient (ex : g, kg, ml) */
     private String unite;
@@ -23,7 +23,7 @@ public class Ingredient {
     /** Liste des informations nutritionnelles (ex : calories, protéines, etc.) */
     private List<Double> informationNutritionnelles;
 
-    public Ingredient(String nom, int id, int nomFamille, String unite, List<Double> informationNutritionnelles) {
+    public Ingredient(String nom, int id, String nomFamille, String unite, List<Double> informationNutritionnelles) {
         this.nom = nom;
         this.id = id;
         this.nomFamille = nomFamille;
@@ -39,7 +39,7 @@ public class Ingredient {
         return id;
     }
 
-    public int getNomFamille() {
+    public String getNomFamille() {
         return nomFamille;
     }
 
