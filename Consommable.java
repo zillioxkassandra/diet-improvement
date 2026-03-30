@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  * La classe Consommable représente un ingrédient consommé
  * avec une quantité spécifique.
@@ -5,9 +6,9 @@
  * Elle permet de lier un ingrédient à une quantité donnée
  * dans le cadre d’un repas.
  */
-public class Consommable extends Ingredient {
-    private String id;
-    private float quantite;
+public class Consommable  {
+    private int id;
+    private double quantite;
     private Ingredient ingredient;
     /**
      * Constructeur de la classe Consommable
@@ -16,7 +17,7 @@ public class Consommable extends Ingredient {
      * @param quantite Quantité consommée
      * @param ingredient Ingrédient associé
      */
-    public Consommable(String id, float quantite, Ingredient ingredient) {
+    public Consommable(int id, double quantite, Ingredient ingredient) {
         this.id = id;
         this.quantite = quantite;
         this.ingredient = ingredient;
@@ -24,10 +25,10 @@ public class Consommable extends Ingredient {
 /**
  *getter et setter
  */
-    public String GetId(){
+    public int GetId(){
         return id;
     }
-    public float GetQuantite(){
+    public double GetQuantite(){
         return quantite;
     }
     public Ingredient GetIngredient(){
@@ -38,6 +39,12 @@ public class Consommable extends Ingredient {
     }
     public void setIngredient(Ingredient ingredient ){
         this.ingredient=ingredient;
+    }
+
+    public static void main(String[] args) {
+        Ingredient i1 = new Ingredient("harcot",14,"legume","kg",Arrays.asList(12.0,14.2));
+        Consommable c = new Consommable(12,12.0,i1);
+        System.out.println(c.GetIngredient().toString());
     }
 
 
