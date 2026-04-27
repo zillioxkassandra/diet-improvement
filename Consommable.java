@@ -42,12 +42,10 @@ public class Consommable  {
     }
 
     public static void main(String[] args) {
-        Ingredient i1 = new Ingredient("harcot",14,"legume","kg",Arrays.asList(12.0,14.2));
+        Ingredient i1 = new Ingredient("harcot","kg",Arrays.asList(12.0,14.2));
         Consommable c = new Consommable(12,12.0,i1);
         System.out.println(c.GetIngredient().toString());
     }
-
-
 
 }
 
