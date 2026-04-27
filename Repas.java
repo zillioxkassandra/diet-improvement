@@ -83,11 +83,40 @@ public class Repas {
 
     }
 
+    public Ingredient findFlaw() {
+        Ingredient ingredientFautif = null;
+        Double nutri_max = 0.0;
+        int indexFlaw = -1;
+
+        for (Consommable consommable : ListConsommable) {
+            Ingredient ingredient = consommable.GetIngredient();
+            List<Double> infosNutri = ingredient.getInformationNutritionnelles();
+
+            for (int i = 0; i < infosNutri.size(); i++) {
+                Double nutri = infosNutri.get(i);
+                if (nutri > 5.0 && nutri > nutri_max) {  // Garder la valeur max
+                    nutri_max = nutri;
+                    ingredientFautif = ingredient;
+                    indexFlaw = i;
+                }
+            }
+        }
+
+        if (ingredientFautif != null) {
+            System.out.println("Ingrédient problématique : " + ingredientFautif.getNom());
+            System.out.println("Valeur dépassée : " + nutri_max + " à l'index " + indexFlaw);
+        } else {
+            System.out.println("✓ Tous les ingrédients sont dans les normes");
+        }
+
+        return ingredientFautif;
+    }
+
 
     public static void main(String[] args) {
 
-        Ingredient i1 = new Ingredient("harcot","g",Arrays.asList(12.0,14.2));
-        Ingredient i2 = new Ingredient("pâtes","g",Arrays.asList(5.0,27.3));
+        Ingredient i1 = new Ingredient("harcot","g",Arrays.asList(0.05,4.2));
+        Ingredient i2 = new Ingredient("pâtes","g",Arrays.asList(5.3,3.6));
         Consommable c1 = new Consommable(12,100,i1);
         Consommable c2 = new Consommable(12,500,i2);
 
@@ -99,6 +128,8 @@ public class Repas {
         System.out.println(repas.toString());
 
         repas.calculer();
+
+        repas.findFlaw();
 
 
 
