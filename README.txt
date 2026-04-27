@@ -17,4 +17,4 @@ git commit -m "Message" (mettre un message explicite svp, permet de sauvegarder 
 git push origin VotreNom  (sauvegarder sur le dépot distant)
 
 Quand vous avez une fonctionnalité complétée : 
-git merge VotreNom
+git push origin main
