@@ -17,7 +17,7 @@ public class Ingredient {
     /** Liste des informations nutritionnelles (ex : calories, protéines, etc.) */
     private List<Double> informationNutritionnelles;
 
-    public Ingredient(String nom,String unite, List<Double> informationNutritionnelles) {
+    public Ingredient(String nom, String unite, List<Double> informationNutritionnelles) {
         this.nom = nom;
         this.unite = unite;
         this.informationNutritionnelles = informationNutritionnelles;
