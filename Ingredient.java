@@ -11,36 +11,20 @@ public class Ingredient {
     /** Nom de l'ingrédient */
     private String nom;
 
-    /** Identifiant unique de l'ingrédient */
-    private int id;
-
-    /** Identifiant de la famille de l'ingrédient */
-    private String nomFamille;
-
     /** Unité de mesure de l'ingrédient (ex : g, kg, ml) */
     private String unite;
 
     /** Liste des informations nutritionnelles (ex : calories, protéines, etc.) */
     private List<Double> informationNutritionnelles;
 
-    public Ingredient(String nom, int id, String nomFamille, String unite, List<Double> informationNutritionnelles) {
+    public Ingredient(String nom,String unite, List<Double> informationNutritionnelles) {
         this.nom = nom;
-        this.id = id;
-        this.nomFamille = nomFamille;
         this.unite = unite;
         this.informationNutritionnelles = informationNutritionnelles;
     }
 
     public String getNom() {
         return nom;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNomFamille() {
-        return nomFamille;
     }
 
     public String getUnite() {
@@ -57,7 +41,11 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient : " + "nom = " + nom + ", id =" + id + ", nom de famille = " + nomFamille + ", unite = "
+        return "Ingredient : " + "nom = " + nom + ", unite = "
                 + unite + ", info Nutri. = " + informationNutritionnelles;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
