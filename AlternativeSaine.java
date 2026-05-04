@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class AlternativeSaine {
 
     public Consommable alternative_saine;
@@ -13,4 +16,8 @@ public class AlternativeSaine {
         // Ask bdd for nutri values
         // print infos
     };
+
+    public static void main(String[] args) {
+        Ingredient i1 = new Ingredient("harcot","g", Arrays.asList(12.0,14.2));
+    }
 }
