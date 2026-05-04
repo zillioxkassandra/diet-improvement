@@ -110,44 +110,115 @@ public class Repas {
      * @return L'ingrédient avec les valeurs nutritionnelles les plus élevées
      */
     public Ingredient findFlaw() {
-        Ingredient ingredientFautif = null;
-        Double nutri_max = 0.0;
-        int indexNutrimentProblematique = -1;
+        // Seuils recommandés par REPAS
+        double[] seuilsMin = {400, 10, 5, 50, 4, 0, 0};
+        double[] seuilsMax = {800, 50, 25, 130, Double.MAX_VALUE, 600, Double.MAX_VALUE};
 
         String[] labels = {"Énergie (kcal)", "Protéines (g)", "Lipides (g)",
                 "Glucides (g)", "Fibres (g)", "Sodium (mg)", "Eau (g)"};
 
-        for (Consommable consommable : listConsommable) {
-            Ingredient ingredient = consommable.getIngredient();
-            List<Double> nutriments = ingredient.getInformationNutritionnelles();
+        // Calculer les totaux du repas
+        ArrayList<Double> totalNutriments = calculer();
 
-            // Parcourir tous les nutriments
-            for (int i = 0; i < nutriments.size(); i++) {
-                Double valeurNutriment = nutriments.get(i);
+        if (totalNutriments.isEmpty()) {
+            System.out.println("❌ Repas vide");
+            return null;
+        }
 
-                // Chercher la valeur maximale (surtout pour Energy, Fat, Sugar)
-                if (valeurNutriment > nutri_max) {
-                    nutri_max = valeurNutriment;
-                    ingredientFautif = ingredient;
-                    indexNutrimentProblematique = i;
-                }
+        // Trouver les nutriments hors limites
+        ArrayList<Integer> nutrimentProblematiques = new ArrayList<>();
+
+        for (int i = 0; i < totalNutriments.size() && i < seuilsMax.length; i++) {
+            double valeur = totalNutriments.get(i);
+            double min = seuilsMin[i];
+            double max = seuilsMax[i];
+
+            if (valeur < min || valeur > max) {
+                nutrimentProblematiques.add(i);
             }
         }
 
-        if (ingredientFautif != null) {
-            String nomNutriment = (indexNutrimentProblematique >= 0 && indexNutrimentProblematique < labels.length)
-                    ? labels[indexNutrimentProblematique]
-                    : "Nutriment " + indexNutrimentProblematique;
-
-            System.out.println("⚠️  Ingrédient problématique : " + ingredientFautif.getNom());
-            System.out.println("   Nutriment dépassé : " + nomNutriment);
-            System.out.println("   Valeur : " + nutri_max);
-        } else {
-            System.out.println("✓ Tous les ingrédients sont dans les normes");
+        // Si pas de problème global, retourner null
+        if (nutrimentProblematiques.isEmpty()) {
+            System.out.println("\n✅ Le repas '" + nom + "' respecte tous les seuils nutritionnels !\n");
+            return null;
         }
 
-        return ingredientFautif;
+        // Trouver l'ingrédient qui cause le plus de problème
+        Ingredient ingredientCoupable = null;
+        double scoreProbleme = 0;
+
+        for (Consommable consommable : listConsommable) {
+            Ingredient ingredient = consommable.getIngredient();
+            List<Double> nutriments = ingredient.getInformationNutritionnelles();
+            double quantite = consommable.getQuantite();
+            double scoreIngredient = 0;
+
+            // Calculer le score de problème pour cet ingrédient
+            for (int indexProbleme : nutrimentProblematiques) {
+                if (indexProbleme < nutriments.size()) {
+                    double valeurNutriment = nutriments.get(indexProbleme);
+                    double contribution = (valeurNutriment / 100.0) * quantite;
+                    double seuilMax = seuilsMax[indexProbleme];
+                    double seuilMin = seuilsMin[indexProbleme];
+
+                    double valeurTotaleDuRepas = totalNutriments.get(indexProbleme);
+
+                    // Calculer le pourcentage de contribution au problème
+                    if (valeurTotaleDuRepas > seuilMax) {
+                        // Dépasse le maximum
+                        double pourcentageContribution = (contribution / valeurTotaleDuRepas) * 100;
+                        scoreIngredient += pourcentageContribution;
+                    } else if (valeurTotaleDuRepas < seuilMin) {
+                        // En dessous du minimum
+                        double pourcentageManque = ((seuilMin - valeurTotaleDuRepas) / seuilMin) * 100;
+                        scoreIngredient -= pourcentageManque; // Négatif = ne contribue pas assez
+                    }
+                }
+            }
+
+            // Garder l'ingrédient avec le plus grand score de problème
+            if (scoreIngredient > scoreProbleme) {
+                scoreProbleme = scoreIngredient;
+                ingredientCoupable = ingredient;
+            }
+        }
+
+        // Affichage du rapport
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║ ⚠️  REPAS NON ÉQUILIBRÉ");
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║ Repas: " + nom);
+        System.out.println("╠════════════════════════════════════════╣");
+        System.out.println("║ NUTRIMENTS HORS LIMITES:");
+
+        for (int index : nutrimentProblematiques) {
+            double valeur = totalNutriments.get(index);
+            double min = seuilsMin[index];
+            double max = seuilsMax[index];
+
+            String status;
+            if (valeur < min) {
+                status = String.format("INSUFFISANT (%.1f < %.1f)", valeur, min);
+            } else {
+                status = String.format("EXCESSIF (%.1f > %.1f)", valeur, max);
+            }
+
+            System.out.println("║ • " + labels[index] + ": " + status);
+        }
+
+        if (ingredientCoupable != null) {
+            System.out.println("╠════════════════════════════════════════╣");
+            System.out.println("║ INGRÉDIENT LE PLUS PROBLÉMATIQUE:");
+            System.out.println("║ " + ingredientCoupable.getNom());
+            System.out.printf("║ Score problématique: %.1f%%\n", scoreProbleme);
+            System.out.println("╚════════════════════════════════════════╝\n");
+        }
+
+        return ingredientCoupable;
     }
+
+
 
     // ========== CALCUL DES MOYENNES NUTRITIONNELLES ==========
     /**

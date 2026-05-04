@@ -10,8 +10,8 @@ import java.util.List;
 
 /**
  * Classe principale de l'interface graphique.
- * GÃ¨re l'Ã©cran de connexion/crÃ©ation de compte,
- * puis l'interface principale avec panneau historique groupÃ© par date.
+ * Gère l'écran de connexion/création de compte,
+ * puis l'interface principale avec panneau historique groupé par date.
  */
 public class Interface {
 
@@ -19,7 +19,7 @@ public class Interface {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     // =========================================================
-    // POINT D'ENTRÃ‰E
+    // POINT D'ENTRÉE
     // =========================================================
     public static void main(String[] args) {
         GestionUtilisateurs.initialiser();
@@ -34,8 +34,8 @@ public class Interface {
     }
 
     /**
-     * Convertit une date stockÃ©e (yyyy-MM-dd HH:mm) en label de groupe :
-     * "Aujourd'hui", "Hier", ou la date formatÃ©e.
+     * Convertit une date stockée (yyyy-MM-dd HH:mm) en label de groupe :
+     * "Aujourd'hui", "Hier", ou la date formatée.
      */
     private static String labelGroupe(String dateStr) {
         try {
@@ -50,9 +50,9 @@ public class Interface {
     }
 
     /**
-     * Reconstruit le modÃ¨le de la liste avec les sÃ©parateurs de date.
-     * Format d'une entrÃ©e : "Nom|quantitÃ©|yyyy-MM-dd HH:mm"
-     * Dans le modÃ¨le on insÃ¨re des lignes spÃ©ciales prÃ©fixÃ©es par "##GROUP##".
+     * Reconstruit le modèle de la liste avec les séparateurs de date.
+     * Format d'une entrée : "Nom|quantité|yyyy-MM-dd HH:mm"
+     * Dans le modèle on insère des lignes spéciales préfixées par "##GROUP##".
      */
     private static void reconstruireModele(DefaultListModel<String> modele, List<String> historique) {
         modele.clear();
@@ -65,14 +65,14 @@ public class Interface {
             groupes.computeIfAbsent(dateKey, k -> new ArrayList<>()).add(entree);
         }
 
-        // Trier par date dÃ©croissante (plus rÃ©cent en haut)
+        // Trier par date décroissante (plus récent en haut)
         List<Map.Entry<String, List<String>>> entries = new ArrayList<>(groupes.entrySet());
         entries.sort((a, b) -> b.getKey().compareTo(a.getKey()));
 
         for (Map.Entry<String, List<String>> entry : entries) {
             // Ligne de groupe
             modele.addElement("##GROUP##" + labelGroupe(entry.getKey()));
-            // EntrÃ©es du groupe
+            // Entrées du groupe
             for (String e : entry.getValue()) {
                 modele.addElement(e);
             }
@@ -80,10 +80,10 @@ public class Interface {
     }
 
     // =========================================================
-    // Ã‰CRAN DE LOGIN
+    // ÉCRAN DE LOGIN
     // =========================================================
     private static void afficherLogin() {
-        JFrame loginFrame = new JFrame("Connexion â€” Gestion nutritionnelle");
+        JFrame loginFrame = new JFrame("Connexion — Amélioration du régime alimentaire");
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(420, 320);
         loginFrame.setLocationRelativeTo(null);
@@ -91,7 +91,7 @@ public class Interface {
         loginFrame.getContentPane().setBackground(new Color(245, 245, 245));
         loginFrame.setLayout(new BorderLayout());
 
-        JLabel titre = new JLabel("Gestion d'apports nutritifs", SwingConstants.CENTER);
+        JLabel titre = new JLabel("Amélioration du régime alimentaire", SwingConstants.CENTER);
         titre.setFont(new Font("SansSerif", Font.BOLD, 18));
         titre.setForeground(new Color(50, 50, 50));
         titre.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
@@ -130,7 +130,7 @@ public class Interface {
 
         JButton btnConnexion = new JButton("Se connecter");
         styliserBouton(btnConnexion, new Color(102, 204, 102));
-        JButton btnCreer = new JButton("CrÃ©er un compte");
+        JButton btnCreer = new JButton("Créer un compte");
         styliserBouton(btnCreer, new Color(100, 160, 220));
 
         boutons.add(btnConnexion);
@@ -166,21 +166,21 @@ public class Interface {
                 return;
             }
             if (mdp.length() < 4) {
-                messageLabel.setText("Mot de passe trop court (min. 4 caractÃ¨res).");
+                messageLabel.setText("Mot de passe trop court (min. 4 caractères).");
                 return;
             }
             if (GestionUtilisateurs.utilisateurExiste(id)) {
                 messageLabel.setForeground(new Color(200, 50, 50));
-                messageLabel.setText("Cet identifiant est dÃ©jÃ  pris.");
+                messageLabel.setText("Cet identifiant est déjà pris.");
                 return;
             }
             if (GestionUtilisateurs.creerCompte(id, mdp)) {
                 messageLabel.setForeground(new Color(50, 150, 50));
-                messageLabel.setText("Compte crÃ©Ã© ! Vous pouvez vous connecter.");
+                messageLabel.setText("Compte créé ! Vous pouvez vous connecter.");
                 champMotDePasse.setText("");
             } else {
                 messageLabel.setForeground(new Color(200, 50, 50));
-                messageLabel.setText("Erreur lors de la crÃ©ation du compte.");
+                messageLabel.setText("Erreur lors de la création du compte.");
             }
         });
 
@@ -193,7 +193,7 @@ public class Interface {
     // =========================================================
     private static void afficherInterfacePrincipale() {
         JFrame accueil = new JFrame(
-                "Application de gestion d'apports nutritifs â€” " + utilisateurConnecte.getIdentifiant());
+                "Application Amélioration du régime alimentaire — " + utilisateurConnecte.getIdentifiant());
         accueil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         accueil.setExtendedState(JFrame.MAXIMIZED_BOTH);
         accueil.setLayout(new BorderLayout());
@@ -215,7 +215,7 @@ public class Interface {
         listeHistorique.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listeHistorique.setFont(new Font("SansSerif", Font.PLAIN, 13));
 
-        // ===== RENDERER : sÃ©parateurs de date en gris, ingrÃ©dients normaux =====
+        // ===== RENDERER : séparateurs de date en gris, ingrédients normaux =====
         listeHistorique.setCellRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(JList<?> list, Object value,
@@ -235,21 +235,21 @@ public class Interface {
                     return lbl;
                 }
 
-                // Ligne d'ingrÃ©dient normale
+                // Ligne d'ingrédient normale
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 String[] parts = s.split("\\|");
                 if (parts.length >= 3) {
-                    // Affichage : "  Pomme â€” 150g"  (heure en petite police grise via HTML)
+                    // Affichage : "  Pomme — 150g"  (heure en petite police grise via HTML)
                     String heure = parts[2].length() >= 16 ? parts[2].substring(11, 16) : "";
-                    setText("<html>&nbsp;&nbsp;" + parts[0] + " â€” " + parts[1] + "g"
+                    setText("<html>&nbsp;&nbsp;" + parts[0] + " — " + parts[1] + "g"
                             + " <span style='color:#aaaaaa; font-size:10px;'>(" + heure + ")</span></html>");
                 } else if (parts.length == 2) {
-                    setText("  " + parts[0] + " â€” " + parts[1] + "g");
+                    setText("  " + parts[0] + " — " + parts[1] + "g");
                 } else {
                     setText("  " + s);
                 }
 
-                // EmpÃªcher la sÃ©lection des lignes de groupe
+                // Empêcher la sélection des lignes de groupe
                 if (!isSelected) {
                     setForeground(new Color(40, 40, 40));
                     setBackground(new Color(235, 238, 245));
@@ -259,7 +259,7 @@ public class Interface {
             }
         });
 
-        // EmpÃªcher la sÃ©lection des lignes "##GROUP##"
+        // Empêcher la sélection des lignes "##GROUP##"
         listeHistorique.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 int idx = listeHistorique.getSelectedIndex();
@@ -295,11 +295,11 @@ public class Interface {
         JPanel zoneCentrale = new JPanel(new BorderLayout());
         zoneCentrale.setBackground(new Color(245, 245, 245));
 
-        // ===== BASE DE DONNÃ‰ES =====
+        // ===== BASE DE DONNÉES =====
         JPanel base = new JPanel(new FlowLayout(FlowLayout.LEFT));
         base.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(new Color(60, 60, 60)),
-                "IngrÃ©dients de la base de donnÃ©es"));
+                "Ingrédients de la base de données"));
         base.setBackground(new Color(230, 230, 230));
 
         String[] ingredients = { "Pomme", "Banane", "Carotte", "Tomate", "Lait", "Oeuf",
@@ -310,7 +310,7 @@ public class Interface {
         recherche.setBackground(Color.WHITE);
 
         JPanel ligneBase = new JPanel(new BorderLayout());
-        ligneBase.setPreferredSize(new Dimension(750, 40));
+        ligneBase.setPreferredSize(new Dimension(600, 40));
         ligneBase.setBackground(new Color(230, 230, 230));
 
         JButton plus = new JButton("+");
@@ -323,7 +323,7 @@ public class Interface {
         JPanel utilisateur = new JPanel(new GridLayout(10, 1, 5, 5));
         utilisateur.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(new Color(60, 60, 60)),
-                "Tableau des ingrÃ©dients de l'utilisateur"));
+                "Tableau des ingrédients de l'utilisateur"));
         utilisateur.setBackground(new Color(230, 230, 230));
 
         JTextField[] champsUtilisateur = new JTextField[10];
@@ -384,7 +384,7 @@ public class Interface {
         // ===== BOUTONS SUD =====
         JButton quitter = new JButton("Quitter");
         JButton valider = new JButton("Valider");
-        JButton deconnexion = new JButton("DÃ©connexion");
+        JButton deconnexion = new JButton("Déconnexion");
 
         styliserBouton(valider, new Color(102, 204, 102));
         styliserBouton(quitter, new Color(255, 102, 102));
@@ -400,7 +400,7 @@ public class Interface {
                 }
             }
             reconstruireModele(modeleHistorique, utilisateurConnecte.getHistorique());
-            JOptionPane.showMessageDialog(accueil, "Repas validÃ© et historique mis Ã  jour !", "ValidÃ©",
+            JOptionPane.showMessageDialog(accueil, "Repas validé et historique mis à jour !", "Validé",
                     JOptionPane.INFORMATION_MESSAGE);
         });
 
