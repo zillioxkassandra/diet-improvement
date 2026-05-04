@@ -275,26 +275,6 @@ public class Ingredient {
         return null;
     }
 
-    /**
-     * Recherche les ingrédients contenant un mot-clé
-     * @param motCle Mot-clé à rechercher
-     * @return ArrayList des ingrédients correspondants
-     */
-    public static ArrayList<Ingredient> rechercherParMotCle(String motCle) {
-        chargerIngredientsJSON();
-        ArrayList<Ingredient> resultats = new ArrayList<>();
-        String motCleLower = motCle.toLowerCase();
-
-        if (ingredientsCache != null) {
-            for (Ingredient ingredient : ingredientsCache) {
-                if (ingredient.getNom().toLowerCase().contains(motCleLower)) {
-                    resultats.add(ingredient);
-                }
-            }
-        }
-
-        return resultats;
-    }
 
     /**
      * Affiche les ingrédients d'une catégorie (par numéro ou critère)
@@ -347,13 +327,6 @@ public class Ingredient {
                 System.out.println(riz);
             }
 
-            // Recherche par mot-clé
-            System.out.println("=== RECHERCHE PAR MOT-CLÉ (cheese) ===\n");
-            ArrayList<Ingredient> cheeses = Ingredient.rechercherParMotCle("cheese");
-            System.out.println("Trouvé " + cheeses.size() + " résultats:");
-            for (Ingredient cheese : cheeses) {
-                System.out.println("  • " + cheese.getNom());
-            }
 
             // Afficher une page
             System.out.println("\n=== AFFICHAGE PAR PAGE ===\n");
