@@ -11,7 +11,7 @@ public class Ingredient {
     /** Nom de l'ingrédient */
     private String nom;
 
-    /** Unité de mesure de l'ingrédient (ex : g, kg, ml) */
+    /** Unité de mesure de l'ingrédient ( g,ml) */
     private String unite;
 
     /** Liste des informations nutritionnelles (ex : calories, protéines, etc.) */
@@ -38,6 +38,8 @@ public class Ingredient {
     public Ingredient getIngredient() {
         return this;
     }
+
+
 
     @Override
     public String toString() {
