@@ -1,0 +1,1204 @@
+{
+  "ingredients": [
+    {
+      "id": 1,
+      "nom": "Apple",
+      "unite": "g",
+      "informationNutritionnelles": [52, 0.26, 0.17, 13.81, 2.4, 10.39, 85.56]
+    },
+    {
+      "id": 2,
+      "nom": "Banana",
+      "unite": "g",
+      "informationNutritionnelles": [89, 1.09, 0.33, 22.84, 2.6, 12.23, 74.91]
+    },
+    {
+      "id": 3,
+      "nom": "Orange",
+      "unite": "g",
+      "informationNutritionnelles": [47, 0.94, 0.12, 11.75, 2.4, 9.35, 86.75]
+    },
+    {
+      "id": 4,
+      "nom": "Strawberry",
+      "unite": "g",
+      "informationNutritionnelles": [32, 0.67, 0.3, 7.68, 2, 4.89, 91.0]
+    },
+    {
+      "id": 5,
+      "nom": "Blueberry",
+      "unite": "g",
+      "informationNutritionnelles": [57, 0.74, 0.33, 14.49, 2.4, 9.96, 84.21]
+    },
+    {
+      "id": 6,
+      "nom": "Carrot",
+      "unite": "g",
+      "informationNutritionnelles": [41, 0.93, 0.24, 9.58, 2.8, 4.74, 88.29]
+    },
+    {
+      "id": 7,
+      "nom": "Broccoli",
+      "unite": "g",
+      "informationNutritionnelles": [34, 2.82, 0.37, 6.64, 2.4, 1.7, 89.3]
+    },
+    {
+      "id": 8,
+      "nom": "Spinach",
+      "unite": "g",
+      "informationNutritionnelles": [23, 2.86, 0.39, 3.63, 2.2, 0.42, 91.4]
+    },
+    {
+      "id": 9,
+      "nom": "Tomato",
+      "unite": "g",
+      "informationNutritionnelles": [18, 0.88, 0.2, 3.89, 1.2, 2.26, 95.0]
+    },
+    {
+      "id": 10,
+      "nom": "Lettuce",
+      "unite": "g",
+      "informationNutritionnelles": [15, 1.36, 0.22, 2.87, 1.3, 0.78, 95.64]
+    },
+    {
+      "id": 11,
+      "nom": "Onion",
+      "unite": "g",
+      "informationNutritionnelles": [40, 1.1, 0.1, 9.34, 1.7, 4.44, 89.11]
+    },
+    {
+      "id": 12,
+      "nom": "Garlic",
+      "unite": "g",
+      "informationNutritionnelles": [149, 6.36, 0.5, 33.06, 2.1, 1.0, 58.58]
+    },
+    {
+      "id": 13,
+      "nom": "Potato",
+      "unite": "g",
+      "informationNutritionnelles": [77, 2.1, 0.09, 17.49, 2.1, 0.84, 79.25]
+    },
+    {
+      "id": 14,
+      "nom": "Sweet Potato",
+      "unite": "g",
+      "informationNutritionnelles": [86, 1.6, 0.1, 20.12, 3.0, 4.18, 77.28]
+    },
+    {
+      "id": 15,
+      "nom": "Bell Pepper",
+      "unite": "g",
+      "informationNutritionnelles": [31, 1.0, 0.3, 5.5, 1.7, 3.26, 92.21]
+    },
+    {
+      "id": 16,
+      "nom": "Cucumber",
+      "unite": "g",
+      "informationNutritionnelles": [16, 0.65, 0.11, 3.63, 0.5, 1.67, 95.23]
+    },
+    {
+      "id": 17,
+      "nom": "Chicken Breast",
+      "unite": "g",
+      "informationNutritionnelles": [165, 31.0, 3.6, 0, 0, 74.0, 65.0]
+    },
+    {
+      "id": 18,
+      "nom": "Beef",
+      "unite": "g",
+      "informationNutritionnelles": [250, 26.0, 17.0, 0, 0, 75.0, 61.0]
+    },
+    {
+      "id": 19,
+      "nom": "Pork",
+      "unite": "g",
+      "informationNutritionnelles": [242, 27.0, 14.0, 0, 0, 71.0, 59.0]
+    },
+    {
+      "id": 20,
+      "nom": "Salmon",
+      "unite": "g",
+      "informationNutritionnelles": [208, 20.0, 13.0, 0, 0, 71.0, 64.0]
+    },
+    {
+      "id": 21,
+      "nom": "Tuna",
+      "unite": "g",
+      "informationNutritionnelles": [132, 29.91, 1.33, 0, 0, 75.51, 72.31]
+    },
+    {
+      "id": 22,
+      "nom": "Cod",
+      "unite": "g",
+      "informationNutritionnelles": [82, 17.81, 0.67, 0, 0, 81.22, 82.11]
+    },
+    {
+      "id": 23,
+      "nom": "Eggs",
+      "unite": "g",
+      "informationNutritionnelles": [155, 13.0, 11.0, 1.1, 0, 71.0, 76.0]
+    },
+    {
+      "id": 24,
+      "nom": "Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [61, 3.2, 3.3, 4.8, 0, 113.0, 87.6]
+    },
+    {
+      "id": 25,
+      "nom": "Yogurt",
+      "unite": "g",
+      "informationNutritionnelles": [59, 10.0, 0.4, 3.5, 0, 100.0, 82.0]
+    },
+    {
+      "id": 26,
+      "nom": "Cheese",
+      "unite": "g",
+      "informationNutritionnelles": [402, 25.0, 33.0, 1.3, 0, 728.0, 36.0]
+    },
+    {
+      "id": 27,
+      "nom": "Butter",
+      "unite": "g",
+      "informationNutritionnelles": [717, 0.85, 81.11, 0.06, 0, 2499.0, 15.8]
+    },
+    {
+      "id": 28,
+      "nom": "Bread",
+      "unite": "g",
+      "informationNutritionnelles": [265, 9.0, 3.3, 49.0, 2.7, 5.0, 35.0]
+    },
+    {
+      "id": 29,
+      "nom": "Rice",
+      "unite": "g",
+      "informationNutritionnelles": [365, 6.61, 0.66, 80.13, 1.3, 0, 12.0]
+    },
+    {
+      "id": 30,
+      "nom": "Pasta",
+      "unite": "g",
+      "informationNutritionnelles": [371, 13.0, 1.1, 75.0, 1.8, 0.3, 10.5]
+    },
+    {
+      "id": 31,
+      "nom": "Oats",
+      "unite": "g",
+      "informationNutritionnelles": [389, 16.9, 6.9, 66.3, 10.6, 0, 8.0]
+    },
+    {
+      "id": 32,
+      "nom": "Corn",
+      "unite": "g",
+      "informationNutritionnelles": [86, 3.27, 1.35, 19.02, 2.7, 4.74, 73.28]
+    },
+    {
+      "id": 33,
+      "nom": "Lentils",
+      "unite": "g",
+      "informationNutritionnelles": [116, 9.02, 0.38, 20.13, 7.9, 1.5, 9.92]
+    },
+    {
+      "id": 34,
+      "nom": "Chickpeas",
+      "unite": "g",
+      "informationNutritionnelles": [164, 8.86, 2.59, 27.42, 6.4, 5.36, 60.21]
+    },
+    {
+      "id": 35,
+      "nom": "Beans",
+      "unite": "g",
+      "informationNutritionnelles": [127, 8.67, 0.38, 23.0, 6.4, 0.3, 11.34]
+    },
+    {
+      "id": 36,
+      "nom": "Peas",
+      "unite": "g",
+      "informationNutritionnelles": [81, 5.42, 0.4, 14.45, 2.6, 5.7, 78.86]
+    },
+    {
+      "id": 37,
+      "nom": "Peanuts",
+      "unite": "g",
+      "informationNutritionnelles": [567, 25.8, 49.24, 16.13, 8.5, 240.0, 7.0]
+    },
+    {
+      "id": 38,
+      "nom": "Almonds",
+      "unite": "g",
+      "informationNutritionnelles": [579, 21.15, 49.93, 21.55, 12.5, 264.0, 5.46]
+    },
+    {
+      "id": 39,
+      "nom": "Walnuts",
+      "unite": "g",
+      "informationNutritionnelles": [654, 9.08, 65.21, 13.71, 6.7, 98.0, 4.07]
+    },
+    {
+      "id": 40,
+      "nom": "Olive Oil",
+      "unite": "ml",
+      "informationNutritionnelles": [884, 0, 100.0, 0, 0, 1600.0, 0]
+    },
+    {
+      "id": 41,
+      "nom": "Honey",
+      "unite": "g",
+      "informationNutritionnelles": [304, 0.3, 0, 82.4, 0.2, 11.0, 17.1]
+    },
+    {
+      "id": 42,
+      "nom": "Sugar",
+      "unite": "g",
+      "informationNutritionnelles": [387, 0, 0, 100.0, 0, 6.0, 0]
+    },
+    {
+      "id": 43,
+      "nom": "Salt",
+      "unite": "g",
+      "informationNutritionnelles": [0, 0, 0, 0, 0, 38758.0, 0]
+    },
+    {
+      "id": 44,
+      "nom": "Black Pepper",
+      "unite": "g",
+      "informationNutritionnelles": [251, 10.39, 3.26, 64.81, 25.3, 21.0, 11.9]
+    },
+    {
+      "id": 45,
+      "nom": "Cinnamon",
+      "unite": "g",
+      "informationNutritionnelles": [247, 3.99, 3.25, 80.59, 53.1, 60.0, 10.58]
+    },
+    {
+      "id": 46,
+      "nom": "Vanilla",
+      "unite": "g",
+      "informationNutritionnelles": [288, 0, 0.06, 11.0, 0, 0, 85.0]
+    },
+    {
+      "id": 47,
+      "nom": "Cocoa",
+      "unite": "g",
+      "informationNutritionnelles": [12, 12.3, 3.3, 47.5, 37.0, 12.0, 3.0]
+    },
+    {
+      "id": 48,
+      "nom": "Dark Chocolate",
+      "unite": "g",
+      "informationNutritionnelles": [598, 7.61, 42.63, 46.63, 3.3, 67.0, 1.0]
+    },
+    {
+      "id": 49,
+      "nom": "Milk Chocolate",
+      "unite": "g",
+      "informationNutritionnelles": [535, 7.7, 30.0, 59.4, 0, 220.0, 1.0]
+    },
+    {
+      "id": 50,
+      "nom": "Coffee",
+      "unite": "ml",
+      "informationNutritionnelles": [2, 0.12, 0.02, 0.3, 0, 2.0, 98.75]
+    },
+    {
+      "id": 51,
+      "nom": "Tea",
+      "unite": "ml",
+      "informationNutritionnelles": [2, 0.02, 0, 0, 0, 2.0, 99.5]
+    },
+    {
+      "id": 52,
+      "nom": "Orange Juice",
+      "unite": "ml",
+      "informationNutritionnelles": [45, 0.7, 0.2, 10.4, 0.1, 40.0, 88.3]
+    },
+    {
+      "id": 53,
+      "nom": "Apple Juice",
+      "unite": "ml",
+      "informationNutritionnelles": [46, 0.1, 0.1, 11.3, 0.2, 7.0, 88.4]
+    },
+    {
+      "id": 54,
+      "nom": "Beer",
+      "unite": "ml",
+      "informationNutritionnelles": [43, 0.46, 0, 3.6, 0, 14.0, 92.0]
+    },
+    {
+      "id": 55,
+      "nom": "Wine",
+      "unite": "ml",
+      "informationNutritionnelles": [85, 0.1, 0, 2.6, 0, 20.0, 86.0]
+    },
+    {
+      "id": 56,
+      "nom": "Water",
+      "unite": "ml",
+      "informationNutritionnelles": [0, 0, 0, 0, 0, 0, 100.0]
+    },
+    {
+      "id": 57,
+      "nom": "Avocado",
+      "unite": "g",
+      "informationNutritionnelles": [160, 2.0, 15.0, 9.0, 7.0, 12.0, 73.23]
+    },
+    {
+      "id": 58,
+      "nom": "Coconut",
+      "unite": "g",
+      "informationNutritionnelles": [354, 3.33, 33.49, 15.23, 9.3, 110.0, 47.0]
+    },
+    {
+      "id": 59,
+      "nom": "Lemon",
+      "unite": "g",
+      "informationNutritionnelles": [29, 1.1, 0.3, 9.0, 2.8, 26.0, 88.98]
+    },
+    {
+      "id": 60,
+      "nom": "Lime",
+      "unite": "g",
+      "informationNutritionnelles": [30, 0.7, 0.2, 11.0, 2.8, 33.0, 88.26]
+    },
+    {
+      "id": 61,
+      "nom": "Grape",
+      "unite": "g",
+      "informationNutritionnelles": [67, 0.72, 0.16, 16.93, 0.9, 10.0, 81.3]
+    },
+    {
+      "id": 62,
+      "nom": "Watermelon",
+      "unite": "g",
+      "informationNutritionnelles": [30, 0.61, 0.15, 7.55, 0.4, 8.0, 91.45]
+    },
+    {
+      "id": 63,
+      "nom": "Melon",
+      "unite": "g",
+      "informationNutritionnelles": [34, 0.84, 0.19, 8.16, 0.9, 16.0, 90.15]
+    },
+    {
+      "id": 64,
+      "nom": "Pineapple",
+      "unite": "g",
+      "informationNutritionnelles": [50, 0.54, 0.12, 13.12, 1.4, 13.0, 85.31]
+    },
+    {
+      "id": 65,
+      "nom": "Mango",
+      "unite": "g",
+      "informationNutritionnelles": [60, 0.82, 0.38, 15.0, 1.6, 11.0, 83.46]
+    },
+    {
+      "id": 66,
+      "nom": "Peach",
+      "unite": "g",
+      "informationNutritionnelles": [39, 0.9, 0.25, 9.54, 1.5, 6.0, 88.87]
+    },
+    {
+      "id": 67,
+      "nom": "Pear",
+      "unite": "g",
+      "informationNutritionnelles": [57, 0.36, 0.14, 15.23, 1.7, 7.0, 83.96]
+    },
+    {
+      "id": 68,
+      "nom": "Plum",
+      "unite": "g",
+      "informationNutritionnelles": [46, 0.7, 0.28, 11.42, 1.4, 6.0, 85.75]
+    },
+    {
+      "id": 69,
+      "nom": "Apricot",
+      "unite": "g",
+      "informationNutritionnelles": [48, 1.4, 0.39, 11.12, 2.0, 13.0, 86.35]
+    },
+    {
+      "id": 70,
+      "nom": "Date",
+      "unite": "g",
+      "informationNutritionnelles": [282, 2.68, 0.15, 75.03, 8.0, 64.0, 21.32]
+    },
+    {
+      "id": 71,
+      "nom": "Raisin",
+      "unite": "g",
+      "informationNutritionnelles": [299, 3.07, 0.46, 79.97, 3.7, 37.0, 15.43]
+    },
+    {
+      "id": 72,
+      "nom": "Cranberry",
+      "unite": "g",
+      "informationNutritionnelles": [46, 0.39, 0.13, 12.2, 4.6, 8.0, 87.13]
+    },
+    {
+      "id": 73,
+      "nom": "Raspberry",
+      "unite": "g",
+      "informationNutritionnelles": [53, 1.2, 0.65, 11.94, 6.5, 12.0, 85.75]
+    },
+    {
+      "id": 74,
+      "nom": "Blackberry",
+      "unite": "g",
+      "informationNutritionnelles": [43, 1.39, 0.49, 9.61, 5.3, 20.0, 88.15]
+    },
+    {
+      "id": 75,
+      "nom": "Kiwi",
+      "unite": "g",
+      "informationNutritionnelles": [61, 1.14, 0.52, 14.66, 3.0, 34.0, 83.07]
+    },
+    {
+      "id": 76,
+      "nom": "Cabbage",
+      "unite": "g",
+      "informationNutritionnelles": [25, 1.28, 0.18, 5.8, 2.4, 40.0, 92.18]
+    },
+    {
+      "id": 77,
+      "nom": "Cauliflower",
+      "unite": "g",
+      "informationNutritionnelles": [25, 1.92, 0.28, 4.97, 2.4, 22.0, 92.07]
+    },
+    {
+      "id": 78,
+      "nom": "Celery",
+      "unite": "g",
+      "informationNutritionnelles": [16, 0.67, 0.17, 3.65, 1.6, 64.0, 95.43]
+    },
+    {
+      "id": 79,
+      "nom": "Asparagus",
+      "unite": "g",
+      "informationNutritionnelles": [20, 2.2, 0.12, 3.71, 2.1, 24.0, 93.22]
+    },
+    {
+      "id": 80,
+      "nom": "Green Beans",
+      "unite": "g",
+      "informationNutritionnelles": [31, 1.83, 0.22, 6.97, 2.7, 37.0, 90.32]
+    },
+    {
+      "id": 81,
+      "nom": "Pumpkin",
+      "unite": "g",
+      "informationNutritionnelles": [26, 1.0, 0.1, 6.5, 0.5, 16.0, 91.6]
+    },
+    {
+      "id": 82,
+      "nom": "Eggplant",
+      "unite": "g",
+      "informationNutritionnelles": [25, 0.98, 0.18, 5.88, 3.0, 9.0, 92.3]
+    },
+    {
+      "id": 83,
+      "nom": "Zucchini",
+      "unite": "g",
+      "informationNutritionnelles": [17, 1.56, 0.36, 3.35, 1.0, 19.0, 94.8]
+    },
+    {
+      "id": 84,
+      "nom": "Mushroom",
+      "unite": "g",
+      "informationNutritionnelles": [22, 3.09, 0.34, 3.26, 1.0, 9.0, 92.45]
+    },
+    {
+      "id": 85,
+      "nom": "Artichoke",
+      "unite": "g",
+      "informationNutritionnelles": [47, 3.27, 0.15, 10.51, 5.2, 53.0, 84.94]
+    },
+    {
+      "id": 86,
+      "nom": "Beet",
+      "unite": "g",
+      "informationNutritionnelles": [43, 1.61, 0.17, 9.56, 2.8, 78.0, 87.58]
+    },
+    {
+      "id": 87,
+      "nom": "Radish",
+      "unite": "g",
+      "informationNutritionnelles": [16, 0.68, 0.1, 3.4, 1.6, 45.0, 95.27]
+    },
+    {
+      "id": 88,
+      "nom": "Turnip",
+      "unite": "g",
+      "informationNutritionnelles": [36, 0.9, 0.09, 8.13, 2.3, 67.0, 91.87]
+    },
+    {
+      "id": 89,
+      "nom": "Parsnip",
+      "unite": "g",
+      "informationNutritionnelles": [75, 1.2, 0.3, 17.99, 4.9, 71.0, 79.53]
+    },
+    {
+      "id": 90,
+      "nom": "Leek",
+      "unite": "g",
+      "informationNutritionnelles": [61, 1.5, 0.3, 14.15, 2.4, 92.0, 83.0]
+    },
+    {
+      "id": 91,
+      "nom": "Green Peas",
+      "unite": "g",
+      "informationNutritionnelles": [81, 5.42, 0.4, 14.45, 2.6, 25.0, 78.86]
+    },
+    {
+      "id": 92,
+      "nom": "Corn Flakes",
+      "unite": "g",
+      "informationNutritionnelles": [373, 8.0, 1.0, 85.0, 2.0, 0, 3.0]
+    },
+    {
+      "id": 93,
+      "nom": "Granola",
+      "unite": "g",
+      "informationNutritionnelles": [471, 11.0, 19.0, 63.0, 7.0, 50.0, 4.0]
+    },
+    {
+      "id": 94,
+      "nom": "Chia Seeds",
+      "unite": "g",
+      "informationNutritionnelles": [486, 16.54, 30.74, 42.12, 34.4, 1.0, 5.8]
+    },
+    {
+      "id": 95,
+      "nom": "Flax Seeds",
+      "unite": "g",
+      "informationNutritionnelles": [534, 18.29, 42.16, 28.88, 27.3, 30.0, 6.96]
+    },
+    {
+      "id": 96,
+      "nom": "Sesame Seeds",
+      "unite": "g",
+      "informationNutritionnelles": [563, 17.73, 48.75, 23.65, 11.8, 140.0, 4.69]
+    },
+    {
+      "id": 97,
+      "nom": "Sunflower Seeds",
+      "unite": "g",
+      "informationNutritionnelles": [584, 20.0, 51.46, 20.0, 8.6, 120.0, 4.5]
+    },
+    {
+      "id": 98,
+      "nom": "Pumpkin Seeds",
+      "unite": "g",
+      "informationNutritionnelles": [559, 24.54, 49.05, 10.71, 6.0, 8.0, 5.23]
+    },
+    {
+      "id": 99,
+      "nom": "Tofu",
+      "unite": "g",
+      "informationNutritionnelles": [76, 8.08, 4.8, 1.91, 0.3, 15.0, 84.19]
+    },
+    {
+      "id": 100,
+      "nom": "Tempeh",
+      "unite": "g",
+      "informationNutritionnelles": [195, 19.32, 11.0, 7.64, 0, 50.0, 59.52]
+    },
+    {
+      "id": 101,
+      "nom": "Mozzarella",
+      "unite": "g",
+      "informationNutritionnelles": [280, 28.0, 17.0, 3.1, 0, 505.0, 48.0]
+    },
+    {
+      "id": 102,
+      "nom": "Cheddar",
+      "unite": "g",
+      "informationNutritionnelles": [403, 23.5, 33.0, 1.3, 0, 721.0, 36.75]
+    },
+    {
+      "id": 103,
+      "nom": "Parmesan",
+      "unite": "g",
+      "informationNutritionnelles": [431, 38.0, 29.0, 1.0, 0, 1109.0, 27.0]
+    },
+    {
+      "id": 104,
+      "nom": "Feta",
+      "unite": "g",
+      "informationNutritionnelles": [264, 21.0, 21.0, 4.0, 0, 493.0, 55.2]
+    },
+    {
+      "id": 105,
+      "nom": "Brie",
+      "unite": "g",
+      "informationNutritionnelles": [334, 20.75, 27.68, 0.45, 0, 588.0, 48.25]
+    },
+    {
+      "id": 106,
+      "nom": "Cream Cheese",
+      "unite": "g",
+      "informationNutritionnelles": [342, 5.93, 34.4, 4.08, 0, 98.0, 54.44]
+    },
+    {
+      "id": 107,
+      "nom": "Gouda",
+      "unite": "g",
+      "informationNutritionnelles": [356, 25.0, 27.0, 2.2, 0, 700.0, 41.0]
+    },
+    {
+      "id": 108,
+      "nom": "Swiss Cheese",
+      "unite": "g",
+      "informationNutritionnelles": [380, 26.93, 28.75, 1.38, 0, 868.0, 37.09]
+    },
+    {
+      "id": 109,
+      "nom": "Blue Cheese",
+      "unite": "g",
+      "informationNutritionnelles": [353, 21.0, 28.7, 2.34, 0, 650.0, 42.41]
+    },
+    {
+      "id": 110,
+      "nom": "Ricotta",
+      "unite": "g",
+      "informationNutritionnelles": [174, 11.26, 13.0, 3.0, 0, 207.0, 72.0]
+    },
+    {
+      "id": 111,
+      "nom": "Bacon",
+      "unite": "g",
+      "informationNutritionnelles": [541, 37.0, 43.0, 1.4, 0, 975.0, 18.0]
+    },
+    {
+      "id": 112,
+      "nom": "Ham",
+      "unite": "g",
+      "informationNutritionnelles": [145, 27.5, 3.1, 0, 0, 974.0, 61.0]
+    },
+    {
+      "id": 113,
+      "nom": "Sausage",
+      "unite": "g",
+      "informationNutritionnelles": [301, 12.0, 27.0, 1.5, 0, 703.0, 58.0]
+    },
+    {
+      "id": 114,
+      "nom": "Turkey",
+      "unite": "g",
+      "informationNutritionnelles": [189, 29.0, 7.4, 0, 0, 76.0, 60.0]
+    },
+    {
+      "id": 115,
+      "nom": "Duck",
+      "unite": "g",
+      "informationNutritionnelles": [337, 23.5, 28.3, 0, 0, 75.0, 39.0]
+    },
+    {
+      "id": 116,
+      "nom": "Lamb",
+      "unite": "g",
+      "informationNutritionnelles": [294, 25.6, 21.0, 0, 0, 75.0, 56.0]
+    },
+    {
+      "id": 117,
+      "nom": "Rabbit",
+      "unite": "g",
+      "informationNutritionnelles": [173, 20.9, 9.2, 0, 0, 79.0, 64.0]
+    },
+    {
+      "id": 118,
+      "nom": "Venison",
+      "unite": "g",
+      "informationNutritionnelles": [158, 26.0, 6.0, 0, 0, 77.0, 65.0]
+    },
+    {
+      "id": 119,
+      "nom": "Halibut",
+      "unite": "g",
+      "informationNutritionnelles": [111, 20.8, 2.3, 0, 0, 41.0, 73.8]
+    },
+    {
+      "id": 120,
+      "nom": "Mackerel",
+      "unite": "g",
+      "informationNutritionnelles": [305, 25.3, 23.0, 0, 0, 90.0, 63.5]
+    },
+    {
+      "id": 121,
+      "nom": "Sardine",
+      "unite": "g",
+      "informationNutritionnelles": [208, 25.0, 11.5, 0, 0, 382.0, 59.7]
+    },
+    {
+      "id": 122,
+      "nom": "Trout",
+      "unite": "g",
+      "informationNutritionnelles": [141, 19.9, 6.3, 0, 0, 62.0, 70.0]
+    },
+    {
+      "id": 123,
+      "nom": "Shrimp",
+      "unite": "g",
+      "informationNutritionnelles": [99, 24.0, 0.3, 0.2, 0, 224.0, 76.0]
+    },
+    {
+      "id": 124,
+      "nom": "Crab",
+      "unite": "g",
+      "informationNutritionnelles": [103, 20.3, 1.1, 0.5, 0, 350.0, 78.0]
+    },
+    {
+      "id": 125,
+      "nom": "Oyster",
+      "unite": "g",
+      "informationNutritionnelles": [68, 7.0, 2.5, 4.0, 0, 240.0, 80.0]
+    },
+    {
+      "id": 126,
+      "nom": "Mussels",
+      "unite": "g",
+      "informationNutritionnelles": [86, 12.0, 2.2, 3.7, 0, 280.0, 80.0]
+    },
+    {
+      "id": 127,
+      "nom": "Squid",
+      "unite": "g",
+      "informationNutritionnelles": [92, 16.0, 1.4, 1.5, 0, 250.0, 80.4]
+    },
+    {
+      "id": 128,
+      "nom": "Lobster",
+      "unite": "g",
+      "informationNutritionnelles": [98, 20.5, 1.3, 0.5, 0, 520.0, 76.0]
+    },
+    {
+      "id": 129,
+      "nom": "Clams",
+      "unite": "g",
+      "informationNutritionnelles": [86, 15.0, 1.5, 3.0, 0, 340.0, 80.0]
+    },
+    {
+      "id": 130,
+      "nom": "Scallops",
+      "unite": "g",
+      "informationNutritionnelles": [88, 17.0, 0.8, 3.4, 0, 160.0, 80.0]
+    },
+    {
+      "id": 131,
+      "nom": "Anchovy",
+      "unite": "g",
+      "informationNutritionnelles": [210, 29.0, 10.0, 0, 0, 520.0, 56.6]
+    },
+    {
+      "id": 132,
+      "nom": "Herring",
+      "unite": "g",
+      "informationNutritionnelles": [208, 20.0, 13.0, 0, 0, 280.0, 61.0]
+    },
+    {
+      "id": 133,
+      "nom": "Mince Meat",
+      "unite": "g",
+      "informationNutritionnelles": [213, 23.0, 12.8, 0, 0, 75.0, 62.0]
+    },
+    {
+      "id": 134,
+      "nom": "Steak",
+      "unite": "g",
+      "informationNutritionnelles": [271, 26.0, 18.0, 0, 0, 80.0, 56.0]
+    },
+    {
+      "id": 135,
+      "nom": "Meatball",
+      "unite": "g",
+      "informationNutritionnelles": [288, 17.0, 22.0, 1.5, 0, 90.0, 55.0]
+    },
+    {
+      "id": 136,
+      "nom": "Mortadella",
+      "unite": "g",
+      "informationNutritionnelles": [213, 13.0, 18.0, 1.0, 0, 360.0, 66.0]
+    },
+    {
+      "id": 137,
+      "nom": "Prosciutto",
+      "unite": "g",
+      "informationNutritionnelles": [154, 30.0, 3.0, 1.0, 0, 736.0, 64.0]
+    },
+    {
+      "id": 138,
+      "nom": "Salami",
+      "unite": "g",
+      "informationNutritionnelles": [541, 28.0, 48.0, 1.0, 0, 1316.0, 22.0]
+    },
+    {
+      "id": 139,
+      "nom": "Pepperoni",
+      "unite": "g",
+      "informationNutritionnelles": [504, 23.0, 45.0, 1.5, 0, 1020.0, 28.0]
+    },
+    {
+      "id": 140,
+      "nom": "Bologna",
+      "unite": "g",
+      "informationNutritionnelles": [290, 12.0, 25.0, 2.0, 0, 600.0, 56.0]
+    },
+    {
+      "id": 141,
+      "nom": "Spam",
+      "unite": "g",
+      "informationNutritionnelles": [319, 13.0, 28.0, 2.0, 0, 830.0, 51.0]
+    },
+    {
+      "id": 142,
+      "nom": "Pastrami",
+      "unite": "g",
+      "informationNutritionnelles": [314, 26.0, 24.0, 0, 0, 1050.0, 48.0]
+    },
+    {
+      "id": 143,
+      "nom": "Corned Beef",
+      "unite": "g",
+      "informationNutritionnelles": [213, 27.0, 11.0, 0, 0, 950.0, 60.0]
+    },
+    {
+      "id": 144,
+      "nom": "Rye Bread",
+      "unite": "g",
+      "informationNutritionnelles": [259, 8.5, 3.3, 48.3, 5.8, 3.0, 38.0]
+    },
+    {
+      "id": 145,
+      "nom": "Whole Wheat Bread",
+      "unite": "g",
+      "informationNutritionnelles": [247, 9.8, 3.3, 41.7, 6.8, 5.0, 38.0]
+    },
+    {
+      "id": 146,
+      "nom": "Sourdough Bread",
+      "unite": "g",
+      "informationNutritionnelles": [265, 9.2, 3.5, 50.6, 2.7, 8.0, 33.0]
+    },
+    {
+      "id": 147,
+      "nom": "Baguette",
+      "unite": "g",
+      "informationNutritionnelles": [280, 9.0, 3.5, 56.0, 2.0, 6.0, 32.0]
+    },
+    {
+      "id": 148,
+      "nom": "Naan Bread",
+      "unite": "g",
+      "informationNutritionnelles": [262, 8.5, 3.3, 47.8, 2.5, 10.0, 39.8]
+    },
+    {
+      "id": 149,
+      "nom": "Pita Bread",
+      "unite": "g",
+      "informationNutritionnelles": [275, 9.0, 2.0, 55.0, 1.5, 8.0, 32.0]
+    },
+    {
+      "id": 150,
+      "nom": "Croissant",
+      "unite": "g",
+      "informationNutritionnelles": [406, 8.0, 20.0, 45.0, 2.4, 10.0, 22.0]
+    },
+    {
+      "id": 151,
+      "nom": "Bagel",
+      "unite": "g",
+      "informationNutritionnelles": [250, 9.0, 1.5, 49.0, 2.5, 8.0, 36.0]
+    },
+    {
+      "id": 152,
+      "nom": "Biscuit",
+      "unite": "g",
+      "informationNutritionnelles": [452, 9.0, 20.0, 59.0, 1.8, 12.0, 9.0]
+    },
+    {
+      "id": 153,
+      "nom": "Donut",
+      "unite": "g",
+      "informationNutritionnelles": [452, 4.6, 25.0, 51.4, 0, 15.0, 17.2]
+    },
+    {
+      "id": 154,
+      "nom": "Muffin",
+      "unite": "g",
+      "informationNutritionnelles": [404, 6.5, 17.0, 55.0, 0.8, 10.0, 18.0]
+    },
+    {
+      "id": 155,
+      "nom": "Cookie",
+      "unite": "g",
+      "informationNutritionnelles": [492, 6.0, 23.0, 65.0, 0, 10.0, 2.4]
+    },
+    {
+      "id": 156,
+      "nom": "Cake",
+      "unite": "g",
+      "informationNutritionnelles": [354, 5.0, 14.0, 51.0, 0, 10.0, 25.0]
+    },
+    {
+      "id": 157,
+      "nom": "Brownie",
+      "unite": "g",
+      "informationNutritionnelles": [439, 5.5, 24.0, 52.0, 0, 20.0, 14.0]
+    },
+    {
+      "id": 158,
+      "nom": "Pie",
+      "unite": "g",
+      "informationNutritionnelles": [346, 3.5, 13.5, 50.5, 0, 10.0, 30.0]
+    },
+    {
+      "id": 159,
+      "nom": "Candy",
+      "unite": "g",
+      "informationNutritionnelles": [387, 0, 0, 100.0, 0, 0, 0]
+    },
+    {
+      "id": 160,
+      "nom": "Popcorn",
+      "unite": "g",
+      "informationNutritionnelles": [375, 10.0, 8.0, 74.0, 14.5, 0, 3.0]
+    },
+    {
+      "id": 161,
+      "nom": "Chips",
+      "unite": "g",
+      "informationNutritionnelles": [536, 6.0, 34.0, 53.0, 2.0, 700.0, 2.0]
+    },
+    {
+      "id": 162,
+      "nom": "Crackers",
+      "unite": "g",
+      "informationNutritionnelles": [440, 8.0, 18.0, 61.0, 3.0, 10.0, 7.0]
+    },
+    {
+      "id": 163,
+      "nom": "Wafers",
+      "unite": "g",
+      "informationNutritionnelles": [469, 5.0, 22.0, 59.0, 0.5, 8.0, 5.0]
+    },
+    {
+      "id": 164,
+      "nom": "Pretzels",
+      "unite": "g",
+      "informationNutritionnelles": [383, 9.0, 6.0, 76.0, 6.0, 450.0, 3.0]
+    },
+    {
+      "id": 165,
+      "nom": "Granola Bar",
+      "unite": "g",
+      "informationNutritionnelles": [471, 11.0, 19.0, 63.0, 7.0, 120.0, 4.0]
+    },
+    {
+      "id": 166,
+      "nom": "Cereal Bar",
+      "unite": "g",
+      "informationNutritionnelles": [360, 6.0, 10.0, 60.0, 3.0, 50.0, 20.0]
+    },
+    {
+      "id": 167,
+      "nom": "Protein Bar",
+      "unite": "g",
+      "informationNutritionnelles": [400, 30.0, 10.0, 40.0, 3.0, 100.0, 10.0]
+    },
+    {
+      "id": 168,
+      "nom": "Energy Drink",
+      "unite": "ml",
+      "informationNutritionnelles": [45, 0, 0, 11.0, 0, 30.0, 88.0]
+    },
+    {
+      "id": 169,
+      "nom": "Sports Drink",
+      "unite": "ml",
+      "informationNutritionnelles": [29, 0, 0, 7.5, 0, 55.0, 92.0]
+    },
+    {
+      "id": 170,
+      "nom": "Smoothie",
+      "unite": "ml",
+      "informationNutritionnelles": [65, 2.0, 0.5, 15.0, 1.0, 20.0, 82.0]
+    },
+    {
+      "id": 171,
+      "nom": "Yogurt Drink",
+      "unite": "ml",
+      "informationNutritionnelles": [55, 4.0, 1.0, 8.0, 0, 40.0, 85.0]
+    },
+    {
+      "id": 172,
+      "nom": "Coconut Water",
+      "unite": "ml",
+      "informationNutritionnelles": [19, 0.94, 0.2, 3.71, 1.1, 600.0, 94.0]
+    },
+    {
+      "id": 173,
+      "nom": "Almond Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [17, 0.58, 1.04, 0.64, 0, 150.0, 96.0]
+    },
+    {
+      "id": 174,
+      "nom": "Soy Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [33, 2.95, 1.61, 1.30, 0, 100.0, 92.0]
+    },
+    {
+      "id": 175,
+      "nom": "Oat Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [42, 1.0, 1.5, 3.2, 0, 120.0, 89.0]
+    },
+    {
+      "id": 176,
+      "nom": "Rice Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [54, 0.7, 0.8, 10.2, 0, 50.0, 88.0]
+    },
+    {
+      "id": 177,
+      "nom": "Cashew Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [25, 0.4, 1.5, 1.2, 0, 80.0, 95.0]
+    },
+    {
+      "id": 178,
+      "nom": "Hazelnut Milk",
+      "unite": "ml",
+      "informationNutritionnelles": [48, 1.0, 3.3, 0.9, 0, 100.0, 93.0]
+    },
+    {
+      "id": 179,
+      "nom": "Kombucha",
+      "unite": "ml",
+      "informationNutritionnelles": [15, 0, 0, 3.0, 0, 10.0, 97.0]
+    },
+    {
+      "id": 180,
+      "nom": "Kefir",
+      "unite": "ml",
+      "informationNutritionnelles": [60, 3.3, 3.4, 3.8, 0, 100.0, 87.0]
+    },
+    {
+      "id": 181,
+      "nom": "Vinegar",
+      "unite": "ml",
+      "informationNutritionnelles": [18, 0.04, 0, 0.4, 0, 40.0, 94.0]
+    },
+    {
+      "id": 182,
+      "nom": "Soy Sauce",
+      "unite": "ml",
+      "informationNutritionnelles": [68, 11.0, 0.5, 5.5, 0, 1670.0, 48.0]
+    },
+    {
+      "id": 183,
+      "nom": "Worcestershire Sauce",
+      "unite": "ml",
+      "informationNutritionnelles": [96, 0.9, 0, 24.0, 0, 850.0, 53.0]
+    },
+    {
+      "id": 184,
+      "nom": "Hot Sauce",
+      "unite": "ml",
+      "informationNutritionnelles": [37, 1.0, 0, 8.0, 0, 850.0, 84.0]
+    },
+    {
+      "id": 185,
+      "nom": "BBQ Sauce",
+      "unite": "g",
+      "informationNutritionnelles": [88, 0.5, 0, 23.0, 0.2, 330.0, 68.0]
+    },
+    {
+      "id": 186,
+      "nom": "Ketchup",
+      "unite": "g",
+      "informationNutritionnelles": [99, 1.1, 0.3, 26.0, 0.4, 900.0, 68.0]
+    },
+    {
+      "id": 187,
+      "nom": "Mustard",
+      "unite": "g",
+      "informationNutritionnelles": [66, 3.6, 3.3, 6.4, 2.6, 1200.0, 80.0]
+    },
+    {
+      "id": 188,
+      "nom": "Mayo",
+      "unite": "g",
+      "informationNutritionnelles": [680, 1.4, 75.0, 0.6, 0, 400.0, 16.0]
+    },
+    {
+      "id": 189,
+      "nom": "Peanut Butter",
+      "unite": "g",
+      "informationNutritionnelles": [588, 25.8, 50.4, 20.5, 6.0, 170.0, 1.1]
+    },
+    {
+      "id": 190,
+      "nom": "Almond Butter",
+      "unite": "g",
+      "informationNutritionnelles": [614, 22.2, 56.5, 19.4, 10.5, 160.0, 0.7]
+    },
+    {
+      "id": 191,
+      "nom": "Hummus",
+      "unite": "g",
+      "informationNutritionnelles": [167, 5.5, 9.6, 14.5, 3.9, 200.0, 65.0]
+    },
+    {
+      "id": 192,
+      "nom": "Pesto",
+      "unite": "g",
+      "informationNutritionnelles": [296, 9.0, 26.0, 4.0, 1.5, 500.0, 40.0]
+    },
+    {
+      "id": 193,
+      "nom": "Tahini",
+      "unite": "g",
+      "informationNutritionnelles": [595, 17.0, 54.0, 21.3, 9.3, 110.0, 4.5]
+    },
+    {
+      "id": 194,
+      "nom": "Sour Cream",
+      "unite": "g",
+      "informationNutritionnelles": [193, 3.5, 19.7, 3.7, 0, 50.0, 72.0]
+    },
+    {
+      "id": 195,
+      "nom": "Cottage Cheese",
+      "unite": "g",
+      "informationNutritionnelles": [98, 11.0, 4.3, 3.4, 0, 86.0, 80.0]
+    },
+    {
+      "id": 196,
+      "nom": "Whipped Cream",
+      "unite": "g",
+      "informationNutritionnelles": [340, 2.0, 36.0, 2.7, 0, 50.0, 58.0]
+    },
+    {
+      "id": 197,
+      "nom": "Greek Yogurt",
+      "unite": "g",
+      "informationNutritionnelles": [59, 10.2, 0.4, 3.3, 0, 110.0, 84.0]
+    },
+    {
+      "id": 198,
+      "nom": "Beef Jerky",
+      "unite": "g",
+      "informationNutritionnelles": [411, 33.0, 28.0, 0, 0, 500.0, 28.0]
+    },
+    {
+      "id": 199,
+      "nom": "Chicken Jerky",
+      "unite": "g",
+      "informationNutritionnelles": [316, 36.0, 17.0, 0, 0, 600.0, 42.0]
+    },
+    {
+      "id": 200,
+      "nom": "Turkey Jerky",
+      "unite": "g",
+      "informationNutritionnelles": [280, 37.0, 13.0, 0, 0, 650.0, 48.0]
+    }
+  ]
+}
