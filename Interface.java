@@ -39,6 +39,11 @@ public class Interface {
      */
     private static String labelGroupe(String dateStr) {
         try {
+            // ✅ Ignorer les séparateurs
+            if (dateStr.startsWith("0000-00-00")) {
+                return null; // Pas de groupe pour les séparateurs
+            }
+
             LocalDate date = LocalDate.parse(dateStr.substring(0, 10));
             LocalDate today = LocalDate.now();
             if (date.equals(today)) return "Aujourd'hui";
@@ -70,8 +75,13 @@ public class Interface {
         entries.sort((a, b) -> b.getKey().compareTo(a.getKey()));
 
         for (Map.Entry<String, List<String>> entry : entries) {
-            // Ligne de groupe
-            modele.addElement("##GROUP##" + labelGroupe(entry.getKey()));
+            String label = labelGroupe(entry.getKey());
+
+            // ✅ Ne pas ajouter de groupe si c'est null (séparateur)
+            if (label != null) {
+                modele.addElement("##GROUP##" + label);
+            }
+
             // Entrées du groupe
             for (String e : entry.getValue()) {
                 modele.addElement(e);
@@ -83,7 +93,7 @@ public class Interface {
     // ÉCRAN DE LOGIN
     // =========================================================
     private static void afficherLogin() {
-        JFrame loginFrame = new JFrame("Connexion — Amélioration du régime alimentaire");
+        JFrame loginFrame = new JFrame("Connexion – Gestion nutritionnelle");
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(420, 320);
         loginFrame.setLocationRelativeTo(null);
@@ -91,7 +101,7 @@ public class Interface {
         loginFrame.getContentPane().setBackground(new Color(245, 245, 245));
         loginFrame.setLayout(new BorderLayout());
 
-        JLabel titre = new JLabel("Amélioration du régime alimentaire", SwingConstants.CENTER);
+        JLabel titre = new JLabel("Gestion d'apports nutritifs", SwingConstants.CENTER);
         titre.setFont(new Font("SansSerif", Font.BOLD, 18));
         titre.setForeground(new Color(50, 50, 50));
         titre.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
@@ -193,7 +203,7 @@ public class Interface {
     // =========================================================
     private static void afficherInterfacePrincipale() {
         JFrame accueil = new JFrame(
-                "Application Amélioration du régime alimentaire — " + utilisateurConnecte.getIdentifiant());
+                "Application de gestion d'apports nutritifs – " + utilisateurConnecte.getIdentifiant());
         accueil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         accueil.setExtendedState(JFrame.MAXIMIZED_BOTH);
         accueil.setLayout(new BorderLayout());
@@ -239,12 +249,12 @@ public class Interface {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 String[] parts = s.split("\\|");
                 if (parts.length >= 3) {
-                    // Affichage : "  Pomme — 150g"  (heure en petite police grise via HTML)
+                    // Affichage : "  Pomme – 150g"  (heure en petite police grise via HTML)
                     String heure = parts[2].length() >= 16 ? parts[2].substring(11, 16) : "";
-                    setText("<html>&nbsp;&nbsp;" + parts[0] + " — " + parts[1] + "g"
+                    setText("<html>&nbsp;&nbsp;" + parts[0] + " – " + parts[1] + "g"
                             + " <span style='color:#aaaaaa; font-size:10px;'>(" + heure + ")</span></html>");
                 } else if (parts.length == 2) {
-                    setText("  " + parts[0] + " — " + parts[1] + "g");
+                    setText("  " + parts[0] + " – " + parts[1] + "g");
                 } else {
                     setText("  " + s);
                 }
@@ -302,9 +312,9 @@ public class Interface {
                 "Ingrédients de la base de données"));
         base.setBackground(new Color(230, 230, 230));
 
-        String[] ingredients = { "Pomme", "Banane", "Carotte", "Tomate", "Lait", "Oeuf",
-                "Fromage", "Poulet", "Riz", "Haricot" };
-        JComboBox<String> recherche = new JComboBox<>(ingredients);
+        // ===== COMBOBOX DYNAMIQUE =====
+        ArrayList<String> lesNoms = Ingredient.obtenirTousLesNomsIngreidents();
+        JComboBox<String> recherche = new JComboBox<>(lesNoms.toArray(new String[0]));
         recherche.setEditable(true);
         recherche.setSelectedIndex(-1);
         recherche.setBackground(Color.WHITE);
@@ -338,6 +348,7 @@ public class Interface {
 
             final JTextField ingredient = new JTextField();
             ingredient.setBackground(Color.WHITE);
+            ingredient.setEditable(false); // Empêcher la modification manuelle
             champsUtilisateur[i] = ingredient;
 
             JSpinner quantite = new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
@@ -347,7 +358,11 @@ public class Interface {
             editor.getTextField().setHorizontalAlignment(JTextField.CENTER);
             spinners[i] = quantite;
 
-            moins.addActionListener(e -> ingredient.setText(""));
+            final int index = i;
+            moins.addActionListener(e -> {
+                ingredient.setText("");
+                spinners[index].setValue(0);
+            });
 
             JPanel droite = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
             droite.setBackground(new Color(230, 230, 230));
@@ -391,17 +406,39 @@ public class Interface {
         styliserBouton(deconnexion, new Color(150, 150, 200));
 
         valider.addActionListener(e -> {
+            // ===== CRÉER LE REPAS =====
+            Repas repas = new Repas("Repas validé");
+
             for (int i = 0; i < champsUtilisateur.length; i++) {
                 String texte = champsUtilisateur[i].getText().trim();
-                if (!texte.isEmpty()) {
-                    int qte = (int) spinners[i].getValue();
+                int qte = (int) spinners[i].getValue();
+
+                if (!texte.isEmpty() && qte > 0) {
+                    Ingredient ingredient = new Ingredient(texte);
+                    Consommable consommable = new Consommable(i, qte, ingredient);
+                    repas.ajouter(consommable);
+
+                    // Ajouter à l'historique
                     String entree = texte + "|" + qte + "|" + maintenant();
                     utilisateurConnecte.ajouterAHistorique(entree);
                 }
             }
+
+            // ✅ AJOUTER UN SÉPARATEUR VIDE POUR DISTINGUER LES REPAS
+            utilisateurConnecte.ajouterAHistorique("-------------------------------");
+
+            // Reconstruire le modèle
             reconstruireModele(modeleHistorique, utilisateurConnecte.getHistorique());
-            JOptionPane.showMessageDialog(accueil, "Repas validé et historique mis à jour !", "Validé",
-                    JOptionPane.INFORMATION_MESSAGE);
+
+            // ===== BASCULER VERS LA FENÊTRE DE RÉSULTATS =====
+            accueil.dispose();
+            afficherFenetreResultats(repas, accueil);
+
+            // Réinitialiser les champs
+            for (int i = 0; i < champsUtilisateur.length; i++) {
+                champsUtilisateur[i].setText("");
+                spinners[i].setValue(0);
+            }
         });
 
         quitter.addActionListener(e -> System.exit(0));
@@ -423,6 +460,107 @@ public class Interface {
         accueil.add(panneauHistorique, BorderLayout.WEST);
         accueil.add(zoneCentrale, BorderLayout.CENTER);
         accueil.setVisible(true);
+    }
+
+    // =========================================================
+    // FENÊTRE DE RÉSULTATS NUTRITIONNELS
+    // =========================================================
+    private static void afficherFenetreResultats(Repas repas, JFrame frameParente) {
+        JFrame resultatsFrame = new JFrame("Résultats nutritionnels" + repas.getNom());
+        resultatsFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        resultatsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        resultatsFrame.getContentPane().setBackground(new Color(245, 245, 245));
+        resultatsFrame.setLayout(new BorderLayout());
+
+        // ===== TITRE =====
+        JLabel titre = new JLabel("Analyse nutritionnelle du repas", SwingConstants.CENTER);
+        titre.setFont(new Font("SansSerif", Font.BOLD, 18));
+        titre.setForeground(new Color(50, 50, 50));
+        titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 0));
+        resultatsFrame.add(titre, BorderLayout.NORTH);
+
+        // ===== PANNEAU PRINCIPAL =====
+        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        panelPrincipal.setBackground(new Color(245, 245, 245));
+        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+
+        // ===== AFFICHER LES NUTRIMENTS =====
+        ArrayList<Double> nutriments = repas.calculer();
+        String[] labels = {"Énergie (kcal)", "Protéines (g)", "Lipides (g)",
+                "Glucides (g)", "Fibres (g)", "Sodium (mg)", "Eau (g)"};
+
+        // Seuils recommandés
+        double[] seuilsMin = {400, 10, 5, 50, 4, 0, 0};
+        double[] seuilsMax = {800, 50, 25, 130, Double.MAX_VALUE, 600, Double.MAX_VALUE};
+
+        JPanel panelNutriments = new JPanel(new GridLayout(labels.length, 1, 5, 8));
+        panelNutriments.setBackground(new Color(245, 245, 245));
+
+        for (int i = 0; i < nutriments.size() && i < labels.length; i++) {
+            double valeur = nutriments.get(i);
+            double min = seuilsMin[i];
+            double max = seuilsMax[i];
+
+            // Déterminer la couleur
+            Color couleur = new Color(100, 200, 100); // Vert par défaut
+            String status = "✅";
+
+            if (valeur < min || valeur > max) {
+                couleur = new Color(220, 100, 100); // Rouge si hors limites
+                status = "⚠️";
+            }
+
+            JPanel panelLigne = new JPanel(new BorderLayout());
+            panelLigne.setBackground(couleur);
+            panelLigne.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+
+            JLabel labelNom = new JLabel(status + " " + labels[i]);
+            labelNom.setFont(new Font("SansSerif", Font.BOLD, 14));
+            labelNom.setForeground(Color.WHITE);
+
+            JLabel labelValeur = new JLabel(String.format("%.2f", valeur));
+            labelValeur.setFont(new Font("SansSerif", Font.BOLD, 14));
+            labelValeur.setForeground(Color.WHITE);
+
+            panelLigne.add(labelNom, BorderLayout.WEST);
+            panelLigne.add(labelValeur, BorderLayout.EAST);
+
+            panelNutriments.add(panelLigne);
+        }
+
+        JScrollPane scrollNutriments = new JScrollPane(panelNutriments);
+        scrollNutriments.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(60, 60, 60)),
+                "Détail des nutriments"));
+        scrollNutriments.setBackground(new Color(245, 245, 245));
+
+        panelPrincipal.add(scrollNutriments, BorderLayout.CENTER);
+
+        resultatsFrame.add(panelPrincipal, BorderLayout.CENTER);
+
+        // ===== BOUTONS SUD =====
+        JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 12));
+        panelBoutons.setBackground(new Color(245, 245, 245));
+
+        JButton btnRetour = new JButton("Retour");
+        JButton btnQuitter = new JButton("Quitter");
+
+        styliserBouton(btnRetour, new Color(100, 160, 220));
+        styliserBouton(btnQuitter, new Color(255, 102, 102));
+
+        btnRetour.addActionListener(e -> {
+            resultatsFrame.dispose();
+            afficherInterfacePrincipale();
+        });
+
+        btnQuitter.addActionListener(e -> System.exit(0));
+
+        panelBoutons.add(btnRetour);
+        panelBoutons.add(btnQuitter);
+
+        resultatsFrame.add(panelBoutons, BorderLayout.SOUTH);
+
+        resultatsFrame.setVisible(true);
     }
 
     // =========================================================

@@ -51,19 +51,6 @@ public class Ingredient {
         this.informationNutritionnelles = informationNutritionnelles;
     }
 
-    // ========== CONSTRUCTEUR ANCIEN (compatibilité) ==========
-    /**
-     * Constructeur ancien pour compatibilité avec le code existant
-     * @param nom Nom de l'ingrédient
-     * @param unite Unité de mesure
-     * @param informationNutritionnelles Liste des nutriments
-     */
-    public Ingredient(String nom, String unite, List<Double> informationNutritionnelles) {
-        this.nom = nom;
-        this.unite = unite;
-        this.informationNutritionnelles = informationNutritionnelles;
-    }
-
     // ========== CHARGEMENT DU JSON (SANS GSON) ==========
     /**
      * Charge le fichier JSON contenant tous les ingrédients (sans librairie JSON)
@@ -109,7 +96,7 @@ public class Ingredient {
             System.out.println("✓ " + ingredientsCache.size() + " ingrédients chargés depuis " + JSON_FILE_PATH);
 
         } catch (Exception e) {
-            System.out.println("❌ Erreur lors du chargement du JSON : " + e.getMessage());
+            System.out.println("Erreur lors du chargement du JSON : " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -121,7 +108,7 @@ public class Ingredient {
      */
     private void rechercherEtChargerIngredient(String nomRecherche) {
         if (ingredientsCache == null || ingredientsCache.isEmpty()) {
-            System.out.println("❌ Aucune donnée d'ingrédients disponible");
+            System.out.println("Aucune donnée d'ingrédients disponible");
             return;
         }
 
@@ -143,7 +130,7 @@ public class Ingredient {
             }
         }
 
-        System.out.println("❌ Ingrédient '" + nomRecherche + "' non trouvé");
+        System.out.println("Ingrédient '" + nomRecherche + "' non trouvé");
         this.nom = nomRecherche;
         this.informationNutritionnelles = new ArrayList<>();
     }
@@ -189,7 +176,7 @@ public class Ingredient {
                         .append(": ").append(String.format("%.2f", informationNutritionnelles.get(i))).append("\n");
             }
         } else {
-            sb.append("║ ⚠️  Aucune donnée disponible\n");
+            sb.append("║ Aucune donnée disponible\n");
         }
 
         sb.append("╚════════════════════════════════════╝\n");
@@ -204,7 +191,7 @@ public class Ingredient {
         chargerIngredientsJSON();
 
         if (ingredientsCache == null || ingredientsCache.isEmpty()) {
-            System.out.println("❌ Aucun ingrédient disponible");
+            System.out.println("Aucun ingrédient disponible");
             return;
         }
 
@@ -275,35 +262,6 @@ public class Ingredient {
         return null;
     }
 
-
-    /**
-     * Affiche les ingrédients d'une catégorie (par numéro ou critère)
-     * @param debut Index de début
-     * @param fin Index de fin
-     */
-    public static void afficherIngreidientsPage(int debut, int fin) {
-        chargerIngredientsJSON();
-
-        if (ingredientsCache == null || ingredientsCache.isEmpty()) {
-            System.out.println("❌ Aucun ingrédient disponible");
-            return;
-        }
-
-        System.out.println("\n╔════════════════════════════════════╗");
-        System.out.println("║ INGRÉDIENTS " + (debut + 1) + " À " + Math.min(fin, ingredientsCache.size()));
-        System.out.println("╠════════════════════════════════════╣");
-
-        for (int i = debut; i < Math.min(fin, ingredientsCache.size()); i++) {
-            Ingredient ingredient = ingredientsCache.get(i);
-            System.out.printf("║ %3d. %-30s (%s)\n",
-                    ingredient.getId(),
-                    ingredient.getNom(),
-                    ingredient.getUnite());
-        }
-
-        System.out.println("╚════════════════════════════════════╝\n");
-    }
-
     // ========== EXEMPLE D'UTILISATION ==========
     public static void main(String[] args) {
         try {
@@ -326,16 +284,6 @@ public class Ingredient {
             if (riz != null) {
                 System.out.println(riz);
             }
-
-
-            // Afficher une page
-            System.out.println("\n=== AFFICHAGE PAR PAGE ===\n");
-            Ingredient.afficherIngreidientsPage(0, 10);
-
-            // Créer manuellement (ancien code)
-            System.out.println("=== CRÉATION MANUELLE ===\n");
-            Ingredient manuel = new Ingredient("Carotte", "g", Arrays.asList(41.0, 0.93, 0.24, 9.58, 2.8, 69.0, 88.29));
-            System.out.println(manuel);
 
         } catch (Exception e) {
             System.out.println("Erreur : " + e.getMessage());

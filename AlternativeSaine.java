@@ -18,6 +18,6 @@ public class AlternativeSaine {
     };
 
     public static void main(String[] args) {
-        Ingredient i1 = new Ingredient("harcot","g", Arrays.asList(12.0,14.2));
+
     }
 }

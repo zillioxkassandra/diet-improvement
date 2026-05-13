@@ -131,9 +131,16 @@ public class GestionUtilisateurs {
         if (entree == null || entree.trim().isEmpty()) return;
         List<String> historique = chargerHistorique(identifiant);
 
-        // Pas de doublon
-        if (historique.contains(entree.trim())) return;
-        historique.add(entree.trim());
+        // ✅ PERMETTRE LES DOUBLONS POUR LES SÉPARATEURS
+        if (entree.trim().startsWith("---SÉPARATEUR---")) {
+            // Les séparateurs peuvent toujours être ajoutés
+            historique.add(entree.trim());
+        } else {
+            // Pour les ingrédients normaux, pas de doublon
+            if (!historique.contains(entree.trim())) {
+                historique.add(entree.trim());
+            }
+        }
 
         sauvegarderHistorique(identifiant, historique);
     }

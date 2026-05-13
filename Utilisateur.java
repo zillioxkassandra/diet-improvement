@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * La classe Utilisateur reprÃ©sente un utilisateur connectÃ© Ã  l'application.
- * Elle stocke son identifiant, son Ã©tat de validation,
- * et son historique de recherches/ingrÃ©dients chargÃ© depuis son fichier.
+ * La classe Utilisateur représente un utilisateur connecté à  l'application.
+ * Elle stocke son identifiant, son état de validation,
+ * et son historique de recherches/ingrédients chargé depuis son fichier.
  */
 public class Utilisateur {
 
@@ -13,7 +13,7 @@ public class Utilisateur {
     private List<String> historique;
 
     /**
-     * Constructeur â€” charge automatiquement l'historique depuis le fichier.
+     * Constructeur charge automatiquement l'historique depuis le fichier.
      * @param identifiant identifiant de l'utilisateur (doit exister dans utilisateurs/)
      */
     public Utilisateur(String identifiant) {
@@ -34,20 +34,30 @@ public class Utilisateur {
     }
 
     /**
-     * Retourne l'historique en mÃ©moire (synchronisÃ© avec le fichier).
+     * Retourne l'historique en mémoire (synchronisé avec le fichier).
      */
     public List<String> getHistorique() {
         return new ArrayList<>(historique);
     }
 
     /**
-     * Ajoute un ingrÃ©dient/aliment Ã  l'historique (en mÃ©moire + fichier).
+     * Ajoute un ingrédient/aliment à  l'historique (en mémoire + fichier).
      */
     public void ajouterAHistorique(String entree) {
-        if (!historique.contains(entree)) {
-            historique.add(entree);
+        if (entree == null || entree.trim().isEmpty()) return;
+
+        // ✅ PERMETTRE LES DOUBLONS POUR LES SÉPARATEURS
+        if (entree.startsWith("---SÉPARATEUR---")) {
+            // Les séparateurs peuvent toujours être ajoutés (pas de vérification de doublon)
+            historique.add(entree.trim());
+            GestionUtilisateurs.ajouterHistorique(identifiant, entree.trim());
+        } else {
+            // Pour les ingrédients normaux, pas de doublon
+            if (!historique.contains(entree.trim())) {
+                historique.add(entree.trim());
+                GestionUtilisateurs.ajouterHistorique(identifiant, entree.trim());
+            }
         }
-        GestionUtilisateurs.ajouterHistorique(identifiant, entree);
     }
 
     /**
