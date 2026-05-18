@@ -262,30 +262,25 @@ public class Repas {
         System.out.println("╚════════════════════════════════════╝\n");
     }
 
-    public static void main(String[] args) {
-        try {
-            // Créer des ingrédients depuis le JSON
-            System.out.println("=== Création du repas ===\n");
+    public Repas creerRepasAlternatif(Ingredient ancien, Ingredient remplacement) {
 
-            Ingredient pomme = new Ingredient("Apple");
-            Ingredient poulet = new Ingredient("Chicken Breast");
+        Repas copie = new Repas(this.nom + " (alternatif)");
 
-            // Créer des consommables
-            Consommable c1 = new Consommable(1, 150, pomme);       // 150g de pomme
-            Consommable c2 = new Consommable(2, 200, poulet);      // 200g de poulet
+        for (Consommable c : this.listConsommable) {
 
-            // Créer et configurer le repas
-            Repas repas = new Repas("Déjeuner sain");
-            repas.ajouter(c1);
-            repas.ajouter(c2);
-
-            System.out.println(repas.toString());
-            repas.afficherNutriments();
-            repas.findFlaw();
-
-        } catch (Exception e) {
-            System.out.println("Erreur : " + e.getMessage());
-            e.printStackTrace();
+            if (c.getIngredient().getNom().equals(ancien.getNom())) {
+                // on remplace l'ingrédient problématique
+                copie.ajouter(new Consommable(c.getId(), c.getQuantite(), remplacement));
+            } else {
+                // on garde tel quel
+                copie.ajouter(new Consommable(
+                        c.getId(),
+                        c.getQuantite(),
+                        c.getIngredient()
+                ));
+            }
         }
+
+        return copie;
     }
 }
