@@ -21,16 +21,74 @@ public class Utilisateur {
         this.historique = GestionUtilisateurs.chargerHistorique(identifiant);
     }
 
-    public String getIdentifiant() {
-        return this.identifiant;
-    }
+        JLabel userLabel = new JLabel("Utilisateur :");
+        JTextField userField = new JTextField();
 
-    public void setValider(boolean valider) {
-        this.valider = valider;
-    }
+        JLabel passLabel = new JLabel("Mot de passe :");
+        JPasswordField passField = new JPasswordField();
 
-    public boolean isValider() {
-        return this.valider;
+        JButton loginButton = new JButton("Se connecter");
+        JButton registerButton = new JButton("Créer un compte");
+
+        loginFrame.add(userLabel);
+        loginFrame.add(userField);
+        loginFrame.add(passLabel);
+        loginFrame.add(passField);
+        loginFrame.add(loginButton);
+        loginFrame.add(registerButton);
+
+        // ===== CONNEXION =====
+        loginButton.addActionListener(e -> {
+            String user = userField.getText();
+            String pass = new String(passField.getPassword());
+
+            if(checkUser(user, pass)){
+                loginFrame.dispose();
+                Interface.main(new String[]{user});
+            } else {
+                JOptionPane.showMessageDialog(loginFrame,
+                        "Identifiants incorrects",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        // ===== CREATION COMPTE =====
+        registerButton.addActionListener(e -> {
+            String user = userField.getText();
+            String pass = new String(passField.getPassword());
+
+            if(user.isEmpty() || pass.isEmpty()){
+                JOptionPane.showMessageDialog(loginFrame,
+                        "Remplis tous les champs",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if(userExists(user)){
+                JOptionPane.showMessageDialog(loginFrame,
+                        "Utilisateur déjà existant",
+                        "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter("users.txt", true));
+                writer.write(user + ";" + pass);
+                writer.newLine();
+                writer.close();
+
+                JOptionPane.showMessageDialog(loginFrame,
+                        "Compte créé !");
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+        });
+
+        loginFrame.setLocationRelativeTo(null);
+        loginFrame.setVisible(true);
     }
 
     /**

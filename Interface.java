@@ -317,7 +317,6 @@ public class Interface {
         JComboBox<String> recherche = new JComboBox<>(lesNoms.toArray(new String[0]));
         recherche.setEditable(true);
         recherche.setSelectedIndex(-1);
-        recherche.setBackground(Color.WHITE);
 
         JPanel ligneBase = new JPanel(new BorderLayout());
         ligneBase.setPreferredSize(new Dimension(600, 40));
@@ -341,7 +340,6 @@ public class Interface {
 
         for (int i = 0; i < 10; i++) {
             JPanel ligne = new JPanel(new BorderLayout());
-            ligne.setBackground(new Color(230, 230, 230));
 
             JButton moins = new JButton("-");
             moins.setBackground(new Color(200, 200, 200));
@@ -364,8 +362,7 @@ public class Interface {
                 spinners[index].setValue(0);
             });
 
-            JPanel droite = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
-            droite.setBackground(new Color(230, 230, 230));
+            JPanel droite = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,0));
             droite.add(quantite);
             droite.add(new JLabel("g"));
 
@@ -373,10 +370,18 @@ public class Interface {
             ligne.add(ingredient, BorderLayout.CENTER);
             ligne.add(droite, BorderLayout.EAST);
 
+            int index = i;
+
+            // bouton -
+            moins.addActionListener(e -> {
+                champs[index].setText("");
+                quantites[index].setValue(0);
+            });
+
             utilisateur.add(ligne);
         }
 
-        // ===== ACTION BOUTON + =====
+        // ===== BOUTON + =====
         plus.addActionListener(e -> {
             String selection = (String) recherche.getSelectedItem();
             if (selection != null && !selection.isEmpty()) {
