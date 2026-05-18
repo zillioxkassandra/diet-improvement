@@ -1,14 +1,25 @@
-import javax.swing.*;
-import java.awt.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Login {
-    public static void main(String[] args) {
+/**
+ * La classe Utilisateur représente un utilisateur connecté à  l'application.
+ * Elle stocke son identifiant, son état de validation,
+ * et son historique de recherches/ingrédients chargé depuis son fichier.
+ */
+public class Utilisateur {
 
-        JFrame loginFrame = new JFrame("Authentification");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        loginFrame.setSize(350,200);
-        loginFrame.setLayout(new GridLayout(4,2,5,5));
+    private String identifiant;
+    private boolean valider = false;
+    private List<String> historique;
+
+    /**
+     * Constructeur charge automatiquement l'historique depuis le fichier.
+     * @param identifiant identifiant de l'utilisateur (doit exister dans utilisateurs/)
+     */
+    public Utilisateur(String identifiant) {
+        this.identifiant = identifiant;
+        this.historique = GestionUtilisateurs.chargerHistorique(identifiant);
+    }
 
         JLabel userLabel = new JLabel("Utilisateur :");
         JTextField userField = new JTextField();
@@ -80,45 +91,50 @@ public class Login {
         loginFrame.setVisible(true);
     }
 
-    // ===== VERIFIER LOGIN =====
-    private static boolean checkUser(String user, String pass){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-            String line;
-
-            while((line = reader.readLine()) != null){
-                String[] parts = line.split(";");
-
-                if(parts[0].equals(user) && parts[1].equals(pass)){
-                    reader.close();
-                    return true;
-                }
-            }
-
-            reader.close();
-        } catch(IOException e){
-        }
-        return false;
+    /**
+     * Retourne l'historique en mémoire (synchronisé avec le fichier).
+     */
+    public List<String> getHistorique() {
+        return new ArrayList<>(historique);
     }
 
-    // ===== VERIFIER SI USER EXISTE =====
-    private static boolean userExists(String user){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("users.txt"));
-            String line;
+    /**
+     * Ajoute un ingrédient/aliment à  l'historique (en mémoire + fichier).
+     */
+    public void ajouterAHistorique(String entree) {
+        if (entree == null || entree.trim().isEmpty()) return;
 
-            while((line = reader.readLine()) != null){
-                String[] parts = line.split(";");
-
-                if(parts[0].equals(user)){
-                    reader.close();
-                    return true;
-                }
+        // ✅ PERMETTRE LES DOUBLONS POUR LES SÉPARATEURS
+        if (entree.startsWith("---SÉPARATEUR---")) {
+            // Les séparateurs peuvent toujours être ajoutés (pas de vérification de doublon)
+            historique.add(entree.trim());
+            GestionUtilisateurs.ajouterHistorique(identifiant, entree.trim());
+        } else {
+            // Pour les ingrédients normaux, pas de doublon
+            if (!historique.contains(entree.trim())) {
+                historique.add(entree.trim());
+                GestionUtilisateurs.ajouterHistorique(identifiant, entree.trim());
             }
-
-            reader.close();
-        } catch(IOException e){
         }
-        return false;
+    }
+
+    /**
+     * Supprime une entrÃ©e de l'historique (en mÃ©moire + fichier).
+     */
+    public void supprimerDeHistorique(String entree) {
+        historique.remove(entree);
+        GestionUtilisateurs.supprimerHistorique(identifiant, entree);
+    }
+
+    /**
+     * Recharge l'historique depuis le fichier (utile aprÃ¨s modification externe).
+     */
+    public void rechargerHistorique() {
+        this.historique = GestionUtilisateurs.chargerHistorique(identifiant);
+    }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{identifiant='" + identifiant + "', valider=" + valider + "}";
     }
 }
