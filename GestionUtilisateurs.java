@@ -131,7 +131,6 @@ public class GestionUtilisateurs {
         if (entree == null || entree.trim().isEmpty()) return;
         List<String> historique = chargerHistorique(identifiant);
 
-        // ✅ PERMETTRE LES DOUBLONS POUR LES SÉPARATEURS
         if (entree.trim().startsWith("---SÉPARATEUR---")) {
             // Les séparateurs peuvent toujours être ajoutés
             historique.add(entree.trim());

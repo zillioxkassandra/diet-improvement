@@ -18,13 +18,6 @@ public class Interface {
     private static Utilisateur utilisateurConnecte = null;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    // =========================================================
-    // POINT D'ENTRÉE
-    // =========================================================
-    public static void main(String[] args) {
-        GestionUtilisateurs.initialiser();
-        SwingUtilities.invokeLater(Interface::afficherLogin);
-    }
 
     // =========================================================
     // UTILITAIRE DATE
@@ -92,7 +85,7 @@ public class Interface {
     // =========================================================
     // ÉCRAN DE LOGIN
     // =========================================================
-    private static void afficherLogin() {
+    public static void afficherLogin() {
         JFrame loginFrame = new JFrame("Connexion – Gestion nutritionnelle");
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(420, 320);
