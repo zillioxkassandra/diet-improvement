@@ -27,15 +27,11 @@ public class Login {
             String user = userField.getText();
             String pass = new String(passField.getPassword());
 
-            if(user.equals("admin") && pass.equals("1234")) {
-                loginFrame.dispose();
-                Interface.main(null);
-            } else {
-                JOptionPane.showMessageDialog(loginFrame,
+            JOptionPane.showMessageDialog(loginFrame,
                         "Utilisateur ou mot de passe incorrect !",
                         "Erreur",
                         JOptionPane.ERROR_MESSAGE);
-            }
+
         });
 
         loginFrame.getRootPane().setDefaultButton(loginButton);

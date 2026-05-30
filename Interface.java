@@ -18,13 +18,6 @@ public class Interface {
     private static Utilisateur utilisateurConnecte = null;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    // =========================================================
-    // POINT D'ENTRÉE
-    // =========================================================
-    public static void main(String[] args) {
-        GestionUtilisateurs.initialiser();
-        SwingUtilities.invokeLater(Interface::afficherLogin);
-    }
 
     // =========================================================
     // UTILITAIRE DATE
@@ -92,7 +85,7 @@ public class Interface {
     // =========================================================
     // ÉCRAN DE LOGIN
     // =========================================================
-    private static void afficherLogin() {
+    public static void afficherLogin() {
         JFrame loginFrame = new JFrame("Connexion – Gestion nutritionnelle");
         loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         loginFrame.setSize(420, 320);
@@ -317,6 +310,7 @@ public class Interface {
         JComboBox<String> recherche = new JComboBox<>(lesNoms.toArray(new String[0]));
         recherche.setEditable(true);
         recherche.setSelectedIndex(-1);
+        recherche.setBackground(Color.WHITE);
 
         JPanel ligneBase = new JPanel(new BorderLayout());
         ligneBase.setPreferredSize(new Dimension(600, 40));
@@ -340,6 +334,7 @@ public class Interface {
 
         for (int i = 0; i < 10; i++) {
             JPanel ligne = new JPanel(new BorderLayout());
+            ligne.setBackground(new Color(230, 230, 230));
 
             JButton moins = new JButton("-");
             moins.setBackground(new Color(200, 200, 200));
@@ -362,7 +357,8 @@ public class Interface {
                 spinners[index].setValue(0);
             });
 
-            JPanel droite = new JPanel(new FlowLayout(FlowLayout.RIGHT,5,0));
+            JPanel droite = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
+            droite.setBackground(new Color(230, 230, 230));
             droite.add(quantite);
             droite.add(new JLabel("g"));
 
@@ -370,21 +366,29 @@ public class Interface {
             ligne.add(ingredient, BorderLayout.CENTER);
             ligne.add(droite, BorderLayout.EAST);
 
-            int index = i;
-
-            // bouton -
-            moins.addActionListener(e -> {
-                champs[index].setText("");
-                quantites[index].setValue(0);
-            });
-
             utilisateur.add(ligne);
         }
 
-        // ===== BOUTON + =====
+        // ===== ACTION BOUTON + =====
         plus.addActionListener(e -> {
             String selection = (String) recherche.getSelectedItem();
+
             if (selection != null && !selection.isEmpty()) {
+
+                // ===== Vérifier si l'ingrédient existe déjà =====
+                for (JTextField champ : champsUtilisateur) {
+                    if (selection.equalsIgnoreCase(champ.getText().trim())) {
+                        JOptionPane.showMessageDialog(
+                                accueil,
+                                "Cet ingrédient est déjà ajouté.",
+                                "Doublon",
+                                JOptionPane.WARNING_MESSAGE
+                        );
+                        return;
+                    }
+                }
+
+                // ===== Ajouter dans la première ligne vide =====
                 for (int i = 0; i < champsUtilisateur.length; i++) {
                     if (champsUtilisateur[i].getText().isEmpty()) {
                         champsUtilisateur[i].setText(selection);
@@ -411,35 +415,86 @@ public class Interface {
         styliserBouton(deconnexion, new Color(150, 150, 200));
 
         valider.addActionListener(e -> {
+
+            boolean auMoinsUnIngredient = false;
+
+            // ===== Vérifications =====
+            for (int i = 0; i < champsUtilisateur.length; i++) {
+
+                String texte = champsUtilisateur[i].getText().trim();
+                int qte = (int) spinners[i].getValue();
+
+                // Si un ingrédient est présent mais quantité = 0
+                if (!texte.isEmpty() && qte <= 0) {
+                    JOptionPane.showMessageDialog(
+                            accueil,
+                            "La quantité de \"" + texte + "\" doit être supérieure à 0.",
+                            "Quantité invalide",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+
+                // Vérifie qu'il y a au moins un ingrédient valide
+                if (!texte.isEmpty() && qte > 0) {
+                    auMoinsUnIngredient = true;
+                }
+            }
+
+            // Aucun ingrédient valide
+            if (!auMoinsUnIngredient) {
+                JOptionPane.showMessageDialog(
+                        accueil,
+                        "Veuillez ajouter au moins un ingrédient avec une quantité valide.",
+                        "Repas vide",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+
             // ===== CRÉER LE REPAS =====
             Repas repas = new Repas("Repas validé");
 
             for (int i = 0; i < champsUtilisateur.length; i++) {
+
                 String texte = champsUtilisateur[i].getText().trim();
                 int qte = (int) spinners[i].getValue();
 
                 if (!texte.isEmpty() && qte > 0) {
+
                     Ingredient ingredient = new Ingredient(texte);
                     Consommable consommable = new Consommable(i, qte, ingredient);
+
                     repas.ajouter(consommable);
 
-                    // Ajouter à l'historique
+                    // Historique
                     String entree = texte + "|" + qte + "|" + maintenant();
                     utilisateurConnecte.ajouterAHistorique(entree);
                 }
             }
 
-            // ✅ AJOUTER UN SÉPARATEUR VIDE POUR DISTINGUER LES REPAS
+            // Séparateur repas
             utilisateurConnecte.ajouterAHistorique("-------------------------------");
 
-            // Reconstruire le modèle
             reconstruireModele(modeleHistorique, utilisateurConnecte.getHistorique());
 
-            // ===== BASCULER VERS LA FENÊTRE DE RÉSULTATS =====
             accueil.dispose();
-            afficherFenetreResultats(repas, accueil);
+            Ingredient ingredientProblematique = repas.findFlaw();
 
-            // Réinitialiser les champs
+            Ingredient alternative = null;
+
+            if (ingredientProblematique != null) {
+                alternative = AlternativeSaine.alt(ingredientProblematique, 100, repas);
+            }
+
+            afficherFenetreResultats(
+                    repas,
+                    ingredientProblematique,
+                    alternative,
+                    accueil
+            );
+
+            // Réinitialisation
             for (int i = 0; i < champsUtilisateur.length; i++) {
                 champsUtilisateur[i].setText("");
                 spinners[i].setValue(0);
@@ -470,97 +525,283 @@ public class Interface {
     // =========================================================
     // FENÊTRE DE RÉSULTATS NUTRITIONNELS
     // =========================================================
-    private static void afficherFenetreResultats(Repas repas, JFrame frameParente) {
-        JFrame resultatsFrame = new JFrame("Résultats nutritionnels" + repas.getNom());
+    private static void afficherFenetreResultats(
+            Repas repas,
+            Ingredient ingredientProblematique,
+            Ingredient alternative,
+            JFrame frameParente) {
+
+        JFrame resultatsFrame = new JFrame("Résultats nutritionnels");
         resultatsFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         resultatsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resultatsFrame.getContentPane().setBackground(new Color(245, 245, 245));
         resultatsFrame.setLayout(new BorderLayout());
 
         // ===== TITRE =====
-        JLabel titre = new JLabel("Analyse nutritionnelle du repas", SwingConstants.CENTER);
-        titre.setFont(new Font("SansSerif", Font.BOLD, 18));
+        JLabel titre = new JLabel(
+                "Analyse nutritionnelle du repas",
+                SwingConstants.CENTER
+        );
+
+        titre.setFont(new Font("SansSerif", Font.BOLD, 20));
         titre.setForeground(new Color(50, 50, 50));
         titre.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 0));
+
         resultatsFrame.add(titre, BorderLayout.NORTH);
 
-        // ===== PANNEAU PRINCIPAL =====
-        JPanel panelPrincipal = new JPanel(new BorderLayout());
+        // =========================================================
+        // ===== PANNEAU PRINCIPAL
+        // =========================================================
+
+        JPanel panelPrincipal = new JPanel(new GridLayout(1, 2, 15, 0));
+
         panelPrincipal.setBackground(new Color(245, 245, 245));
-        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // ===== AFFICHER LES NUTRIMENTS =====
+        panelPrincipal.setBorder(
+                BorderFactory.createEmptyBorder(15, 15, 15, 15)
+        );
+
+        // =========================================================
+        // ===== PARTIE GAUCHE : REPAS
+        // =========================================================
+
+        JPanel panelRepas = new JPanel(new BorderLayout());
+
+        panelRepas.setBackground(new Color(245, 245, 245));
+
         ArrayList<Double> nutriments = repas.calculer();
-        String[] labels = {"Énergie (kcal)", "Protéines (g)", "Lipides (g)",
-                "Glucides (g)", "Fibres (g)", "Sodium (mg)", "Eau (g)"};
 
-        // Seuils recommandés
+        String[] labels = {
+                "Énergie (kcal)",
+                "Protéines (g)",
+                "Lipides (g)",
+                "Glucides (g)",
+                "Fibres (g)",
+                "Sodium (mg)",
+                "Eau (g)"
+        };
+
         double[] seuilsMin = {400, 10, 5, 50, 4, 0, 0};
-        double[] seuilsMax = {800, 50, 25, 130, Double.MAX_VALUE, 600, Double.MAX_VALUE};
 
-        JPanel panelNutriments = new JPanel(new GridLayout(labels.length, 1, 5, 8));
+        double[] seuilsMax = {
+                800,
+                50,
+                25,
+                130,
+                Double.MAX_VALUE,
+                600,
+                Double.MAX_VALUE
+        };
+
+        JPanel panelNutriments = new JPanel(
+                new GridLayout(labels.length, 1, 5, 8)
+        );
+
         panelNutriments.setBackground(new Color(245, 245, 245));
 
         for (int i = 0; i < nutriments.size() && i < labels.length; i++) {
-            double valeur = nutriments.get(i);
-            double min = seuilsMin[i];
-            double max = seuilsMax[i];
 
-            // Déterminer la couleur
-            Color couleur = new Color(100, 200, 100); // Vert par défaut
+            double valeur = nutriments.get(i);
+
+            Color couleur = new Color(100, 200, 100);
+
             String status = "✅";
 
-            if (valeur < min || valeur > max) {
-                couleur = new Color(220, 100, 100); // Rouge si hors limites
+            if (valeur < seuilsMin[i] || valeur > seuilsMax[i]) {
+
+                couleur = new Color(220, 100, 100);
+
                 status = "⚠️";
             }
 
-            JPanel panelLigne = new JPanel(new BorderLayout());
-            panelLigne.setBackground(couleur);
-            panelLigne.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+            JPanel ligne = new JPanel(new BorderLayout());
 
-            JLabel labelNom = new JLabel(status + " " + labels[i]);
-            labelNom.setFont(new Font("SansSerif", Font.BOLD, 14));
-            labelNom.setForeground(Color.WHITE);
+            ligne.setBackground(couleur);
 
-            JLabel labelValeur = new JLabel(String.format("%.2f", valeur));
-            labelValeur.setFont(new Font("SansSerif", Font.BOLD, 14));
-            labelValeur.setForeground(Color.WHITE);
+            ligne.setBorder(
+                    BorderFactory.createEmptyBorder(10, 15, 10, 15)
+            );
 
-            panelLigne.add(labelNom, BorderLayout.WEST);
-            panelLigne.add(labelValeur, BorderLayout.EAST);
+            JLabel nom = new JLabel(status + " " + labels[i]);
 
-            panelNutriments.add(panelLigne);
+            nom.setForeground(Color.WHITE);
+
+            nom.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+            JLabel valeurLabel = new JLabel(
+                    String.format("%.2f", valeur)
+            );
+
+            valeurLabel.setForeground(Color.WHITE);
+
+            valeurLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+            ligne.add(nom, BorderLayout.WEST);
+
+            ligne.add(valeurLabel, BorderLayout.EAST);
+
+            panelNutriments.add(ligne);
         }
 
-        JScrollPane scrollNutriments = new JScrollPane(panelNutriments);
-        scrollNutriments.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(new Color(60, 60, 60)),
-                "Détail des nutriments"));
-        scrollNutriments.setBackground(new Color(245, 245, 245));
+        JScrollPane scrollRepas = new JScrollPane(panelNutriments);
 
-        panelPrincipal.add(scrollNutriments, BorderLayout.CENTER);
+        scrollRepas.setBorder(
+                BorderFactory.createTitledBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(60, 60, 60)
+                        ),
+                        "Analyse du repas"
+                )
+        );
+
+        panelRepas.add(scrollRepas, BorderLayout.CENTER);
+
+        // =========================================================
+        // ===== PARTIE DROITE : ALTERNATIVE
+        // =========================================================
+
+        JPanel panelAlternative = new JPanel(new BorderLayout());
+
+        panelAlternative.setBackground(new Color(245, 245, 245));
+
+        JPanel contenuAlternative = new JPanel();
+
+        contenuAlternative.setLayout(
+                new BoxLayout(contenuAlternative, BoxLayout.Y_AXIS)
+        );
+
+        contenuAlternative.setBackground(new Color(245, 245, 245));
+
+        if (ingredientProblematique != null && alternative != null) {
+
+            JLabel remplacement = new JLabel(
+                    "<html><center><b>"
+                            + ingredientProblematique.getNom()
+                            + "</b><br><br>remplacé par<br><br><b>"
+                            + alternative.getNom()
+                            + "</b></center></html>",
+                    SwingConstants.CENTER
+            );
+
+            remplacement.setFont(
+                    new Font("SansSerif", Font.BOLD, 20)
+            );
+
+            remplacement.setBorder(
+                    BorderFactory.createEmptyBorder(20, 20, 20, 20)
+            );
+
+            contenuAlternative.add(remplacement);
+
+            List<Double> nutrimentsAlt =
+                    alternative.getInformationNutritionnelles();
+
+            for (int i = 0;
+                 i < nutrimentsAlt.size() && i < labels.length;
+                 i++) {
+
+                JPanel ligne = new JPanel(new BorderLayout());
+
+                ligne.setBackground(new Color(100, 160, 220));
+
+                ligne.setBorder(
+                        BorderFactory.createEmptyBorder(10, 15, 10, 15)
+                );
+
+                JLabel nom = new JLabel(labels[i]);
+
+                nom.setForeground(Color.WHITE);
+
+                nom.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+                JLabel valeur = new JLabel(
+                        String.format("%.2f", nutrimentsAlt.get(i))
+                );
+
+                valeur.setForeground(Color.WHITE);
+
+                valeur.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+                ligne.add(nom, BorderLayout.WEST);
+
+                ligne.add(valeur, BorderLayout.EAST);
+
+                contenuAlternative.add(ligne);
+
+                contenuAlternative.add(Box.createVerticalStrut(5));
+            }
+
+        } else {
+
+            JLabel aucuneAlternative = new JLabel(
+                    "<html><center>Aucune alternative saine trouvée.</center></html>",
+                    SwingConstants.CENTER
+            );
+
+            aucuneAlternative.setFont(
+                    new Font("SansSerif", Font.BOLD, 18)
+            );
+
+            contenuAlternative.add(Box.createVerticalGlue());
+
+            contenuAlternative.add(aucuneAlternative);
+
+            contenuAlternative.add(Box.createVerticalGlue());
+        }
+
+        JScrollPane scrollAlternative =
+                new JScrollPane(contenuAlternative);
+
+        scrollAlternative.setBorder(
+                BorderFactory.createTitledBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(60, 60, 60)
+                        ),
+                        "Alternative saine"
+                )
+        );
+
+        panelAlternative.add(scrollAlternative, BorderLayout.CENTER);
+
+        // =========================================================
+        // ===== AJOUT DES PANNEAUX
+        // =========================================================
+
+        panelPrincipal.add(panelRepas);
+
+        panelPrincipal.add(panelAlternative);
 
         resultatsFrame.add(panelPrincipal, BorderLayout.CENTER);
 
-        // ===== BOUTONS SUD =====
-        JPanel panelBoutons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 12));
+        // =========================================================
+        // ===== BOUTONS
+        // =========================================================
+
+        JPanel panelBoutons = new JPanel(
+                new FlowLayout(FlowLayout.CENTER, 15, 12)
+        );
+
         panelBoutons.setBackground(new Color(245, 245, 245));
 
         JButton btnRetour = new JButton("Retour");
+
         JButton btnQuitter = new JButton("Quitter");
 
         styliserBouton(btnRetour, new Color(100, 160, 220));
+
         styliserBouton(btnQuitter, new Color(255, 102, 102));
 
         btnRetour.addActionListener(e -> {
+
             resultatsFrame.dispose();
+
             afficherInterfacePrincipale();
         });
 
         btnQuitter.addActionListener(e -> System.exit(0));
 
         panelBoutons.add(btnRetour);
+
         panelBoutons.add(btnQuitter);
 
         resultatsFrame.add(panelBoutons, BorderLayout.SOUTH);
@@ -568,14 +809,19 @@ public class Interface {
         resultatsFrame.setVisible(true);
     }
 
-    // =========================================================
-    // UTILITAIRE : style bouton
-    // =========================================================
     private static void styliserBouton(JButton bouton, Color couleur) {
+
         bouton.setBackground(couleur);
+
         bouton.setForeground(Color.WHITE);
+
         bouton.setFont(new Font("SansSerif", Font.BOLD, 13));
+
         bouton.setFocusPainted(false);
-        bouton.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
+
+        bouton.setBorder(
+                BorderFactory.createEmptyBorder(6, 14, 6, 14)
+        );
     }
+
 }
