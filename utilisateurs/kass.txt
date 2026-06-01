@@ -1,0 +1,9 @@
+MOT_DE_PASSE_HASH:dbff5341acad5e2a58db4efd5e72e2d9a0a843a28e02b1183c68162d0a3a3de6
+HISTORIQUE:
+riz|60|2026-05-30 16:54
+poulet|120|2026-05-30 16:54
+-------------------------------
+Pomme de terre|200|2026-06-01 12:02
+Œuf frit|260|2026-06-01 12:02
+Yaourt|120|2026-06-01 12:02
+Beurre|5|2026-06-01 12:02
